@@ -1,0 +1,24 @@
+name: form_builder_cupertino_fields
+description: Additional form inputs fields with Cupertino style for flutter_form_builder package
+version: 0.0.1
+repository: https://github.com/flutter-form-builder-ecosystem/form_builder_cupertino_fields
+issue_tracker: https://github.com/flutter-form-builder-ecosystem/form_builder_cupertino_fields/issues
+homepage: https://github.com/flutter-form-builder-ecosystem
+funding: 
+  - https://opencollective.com/flutter-form-builder-ecosystem
+
+environment:
+  sdk: '>=2.19.6 <3.0.0'
+  flutter: ">=3.7.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_form_builder: ^8.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.1
+
+flutter:
