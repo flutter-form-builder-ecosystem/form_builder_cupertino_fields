@@ -50,10 +50,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 FormBuilderFieldOption(value: 3, child: Text('Third')),
               ],
               decoration: const InputDecoration(
-                helperText: 'ayuda',
                 prefix: Icon(CupertinoIcons.add),
               ),
-              validator: (value) => 'Error text',
+              validator: (value) => value != null ? null : 'Required field',
               // initialValue: 1,
             ),
             FormBuilderCupertinoSlidingSegmentedControl<String>(
@@ -69,6 +68,13 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               // initialValue: 1,
             ),
+            FormBuilderCupertinoSwitch(
+              name: 'switch',
+              initialValue: true,
+              decoration: const InputDecoration(
+                prefix: Text('Enable/Disabled'),
+              ),
+            )
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
