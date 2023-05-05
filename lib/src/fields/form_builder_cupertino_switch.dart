@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -74,7 +73,7 @@ class FormBuilderCupertinoSwitch extends FormBuilderField<bool> {
     this.thumbColor,
   }) : super(
           builder: (FormFieldState<bool?> field) {
-            final state = field as _FormBuilderSwitchState;
+            final state = field as _FormBuilderCupertinoSwitchState;
 
             final fieldWidget = CupertinoSwitch(
               value: state.value ?? false,
@@ -100,8 +99,8 @@ class FormBuilderCupertinoSwitch extends FormBuilderField<bool> {
 
   @override
   FormBuilderFieldState<FormBuilderCupertinoSwitch, bool> createState() =>
-      _FormBuilderSwitchState();
+      _FormBuilderCupertinoSwitchState();
 }
 
-class _FormBuilderSwitchState
+class _FormBuilderCupertinoSwitchState
     extends FormBuilderFieldState<FormBuilderCupertinoSwitch, bool> {}

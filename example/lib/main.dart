@@ -74,7 +74,17 @@ class _MyHomePageState extends State<MyHomePage> {
               decoration: const InputDecoration(
                 prefix: Text('Enable/Disabled'),
               ),
-            )
+            ),
+            FormBuilderCupertinoSlider(
+              name: 'slider',
+              initialValue: 10,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              min: 1,
+              max: 100,
+              validator: (value) => value != null && value < 50 && value > 5
+                  ? null
+                  : 'Required value between 5 and 50',
+            ),
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
