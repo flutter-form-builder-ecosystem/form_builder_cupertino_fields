@@ -1,6 +1,6 @@
 # Form Builder Cupertino Fields
 
-A extended of [flutter_form_builder](https://pub.dev/packages/flutter_form_builder) package with only Cupertino styles fields
+Additional form inputs fields with Cupertino style for [flutter_form_builder](https://pub.dev/packages/flutter_form_builder) package
 
 [![Pub Version](https://img.shields.io/pub/v/form_builder_cupertino_fields?logo=flutter&style=for-the-badge)](https://pub.dev/packages/form_builder_cupertino_fields)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/flutter-form-builder-ecosystem/form_builder_cupertino_fields/base.yaml?branch=main&logo=github&style=for-the-badge)](https://github.com/flutter-form-builder-ecosystem/form_builder_cupertino_fields/actions/workflows/base.yaml)
