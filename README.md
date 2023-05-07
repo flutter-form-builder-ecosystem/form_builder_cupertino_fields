@@ -2,7 +2,7 @@
 
 Additional form inputs fields with Cupertino style for [flutter_form_builder](https://pub.dev/packages/flutter_form_builder) package
 
-[![Pub Version](https://img.shields.io/pub/v/form_builder_cupertino_fields?logo=flutter&style=for-the-badge)](https://pub.dev/packages/flutter_form_builder)
+[![Pub Version](https://img.shields.io/pub/v/form_builder_cupertino_fields?logo=flutter&style=for-the-badge)](https://pub.dev/packages/form_builder_cupertino_fields)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/flutter-form-builder-ecosystem/form_builder_cupertino_fields/base.yaml?branch=main&logo=github&style=for-the-badge)](https://github.com/flutter-form-builder-ecosystem/form_builder_cupertino_fields/actions/workflows/base.yaml)
 [![Codecov](https://img.shields.io/codecov/c/github/flutter-form-builder-ecosystem/form_builder_cupertino_fields?logo=codecov&style=for-the-badge)](https://codecov.io/gh/flutter-form-builder-ecosystem/form_builder_cupertino_fields/)
 [![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/flutter-form-builder-ecosystem/form_builder_cupertino_fields?logo=codefactor&style=for-the-badge)](https://www.codefactor.io/repository/github/flutter-form-builder-ecosystem/form_builder_cupertino_fields)
@@ -60,7 +60,7 @@ FormBuilder(
 )
 ```
 
-See [pub.dev example tab](https://pub.dev/packages/flutter_form_builder/example) or [github code](example/lib/main.dart) for more details
+See [pub.dev example tab](https://pub.dev/packages/form_builder_cupertino_fields/example) or [github code](example/lib/main.dart) for more details
 
 
 ## Support
