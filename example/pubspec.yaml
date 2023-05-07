@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.5
-  flutter_form_builder: 9.0.0-dev.1
+  flutter_form_builder: ^9.0.0-dev.1
   form_builder_cupertino_fields:
     path: ../
 
