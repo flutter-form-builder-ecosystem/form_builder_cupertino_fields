@@ -3,8 +3,6 @@ import 'package:flutter/gestures.dart';
 
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-import '../widgets/cupertino_input_decoration.dart';
-
 /// On/Off Cupertino switch field
 class FormBuilderCupertinoSwitch extends FormBuilderField<bool> {
   /// The color to use when this switch is on.
@@ -51,13 +49,43 @@ class FormBuilderCupertinoSwitch extends FormBuilderField<bool> {
   /// By default `false`
   final bool shouldExpandedField;
 
+  /// A widget that is displayed at the start of the row.
+  ///
+  /// The [prefix] parameter is displayed at the start of the row. Standard iOS
+  /// guidelines encourage passing a [Text] widget to [prefix] to detail the
+  /// nature of the row's [child] widget. If null, the [child] widget will take
+  /// up all horizontal space in the row.
+  final Widget? prefix;
+
+  /// Content padding for the row.
+  ///
+  /// Defaults to the standard iOS padding for form rows. If no edge insets are
+  /// intended, explicitly pass [EdgeInsets.zero] to [contentPadding].
+  final EdgeInsetsGeometry? contentPadding;
+
+  /// A widget that is displayed underneath the [prefix] and [child] widgets.
+  ///
+  /// The [helper] appears in primary label coloring, and is meant to inform the
+  /// user about interaction with the child widget. The row becomes taller in
+  /// order to display the [helper] widget underneath [prefix] and [child]. If
+  /// null, the row is shorter.
+  final Widget? helper;
+
+  /// A builder widget that is displayed underneath the [prefix] and [child] widgets.
+  ///
+  /// The [error] widget is primarily used to inform users of input errors. When
+  /// a [Text] is given to [error], it will be shown in
+  /// [CupertinoColors.destructiveRed] coloring and medium-weighted font. The
+  /// row becomes taller in order to display the [helper] widget underneath
+  /// [prefix] and [child]. If null, the row is shorter.
+  final Widget? Function(String error)? errorBuilder;
+
   /// Creates On/Off Cupertino switch field
   FormBuilderCupertinoSwitch({
     super.key,
     required super.name,
     super.validator,
     super.initialValue,
-    super.decoration,
     super.onChanged,
     super.valueTransformer,
     super.enabled,
@@ -71,6 +99,10 @@ class FormBuilderCupertinoSwitch extends FormBuilderField<bool> {
     this.shouldExpandedField = false,
     this.trackColor,
     this.thumbColor,
+    this.errorBuilder,
+    this.helper,
+    this.contentPadding,
+    this.prefix,
   }) : super(
           builder: (FormFieldState<bool?> field) {
             final state = field as _FormBuilderCupertinoSwitchState;
@@ -87,9 +119,15 @@ class FormBuilderCupertinoSwitch extends FormBuilderField<bool> {
               thumbColor: thumbColor,
               trackColor: trackColor,
             );
-
-            return CupertinoInputDecoration(
-              fieldState: state,
+            return CupertinoFormRow(
+              error: state.hasError
+                  ? errorBuilder != null
+                      ? errorBuilder(state.errorText ?? '')
+                      : Text(state.errorText ?? '')
+                  : null,
+              helper: helper,
+              padding: contentPadding,
+              prefix: prefix,
               child: shouldExpandedField
                   ? SizedBox(width: double.infinity, child: fieldWidget)
                   : fieldWidget,

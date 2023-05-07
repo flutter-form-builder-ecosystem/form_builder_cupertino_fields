@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:form_builder_cupertino_fields/form_builder_cupertino_fields.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -49,9 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 FormBuilderFieldOption(value: 2, child: Text('Second')),
                 FormBuilderFieldOption(value: 3, child: Text('Third')),
               ],
-              decoration: const InputDecoration(
-                prefix: Icon(CupertinoIcons.add),
-              ),
+              prefix: const Icon(CupertinoIcons.add),
               validator: (value) => value != null ? null : 'Required field',
               // initialValue: 1,
             ),
@@ -62,18 +59,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 FormBuilderFieldOption(value: '2', child: Text('2')),
                 FormBuilderFieldOption(value: '3', child: Text('3')),
               ],
-              decoration: const InputDecoration(
-                helperText: 'Select the numbers',
-                prefix: Icon(CupertinoIcons.number),
-              ),
-              // initialValue: 1,
+              helper: const Text('Select the numbers'),
+              prefix: const Icon(CupertinoIcons.number),
             ),
             FormBuilderCupertinoSwitch(
               name: 'switch',
               initialValue: true,
-              decoration: const InputDecoration(
-                prefix: Text('Enable/Disabled'),
-              ),
+              prefix: const Text('Enable/Disabled'),
             ),
             FormBuilderCupertinoSlider(
               name: 'slider',

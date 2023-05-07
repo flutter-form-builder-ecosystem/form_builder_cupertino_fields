@@ -215,12 +215,17 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
   /// By default `false`
   final bool readOnly;
 
+  /// Controls the [BoxDecoration] of the box behind the text input.
+  ///
+  /// Defaults to having a rounded rectangle grey border and can be null to have
+  /// no box decoration.
+  final BoxDecoration? decoration;
+
   FormBuilderCupertinoTextField({
     super.key,
     required super.name,
     super.validator,
     String? initialValue,
-    super.decoration,
     super.onChanged,
     super.valueTransformer,
     super.enabled,
@@ -271,6 +276,7 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
     this.obscuringCharacter = '•',
     this.contextMenuBuilder = _defaultContextMenuBuilder,
     this.magnifierConfiguration,
+    this.decoration,
   }) : super(
           builder: (FormFieldState<String?> field) {
             final state = field as _FormBuilderCupertinoTextFieldState;
@@ -279,7 +285,7 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
               restorationId: restorationId,
               controller: state._effectiveController,
               focusNode: state.effectiveFocusNode,
-              decoration: BoxDecoration(),
+              decoration: decoration,
               keyboardType: keyboardType,
               textInputAction: textInputAction,
               style: style,

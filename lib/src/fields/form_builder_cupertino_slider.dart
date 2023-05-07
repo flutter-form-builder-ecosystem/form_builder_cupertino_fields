@@ -3,8 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 
-import '../widgets/cupertino_input_decoration.dart';
-
 /// Field for selection of a numerical value on a slider
 class FormBuilderCupertinoSlider extends FormBuilderField<double> {
   /// Called when the user starts selecting a new value for the slider.
@@ -127,13 +125,43 @@ class FormBuilderCupertinoSlider extends FormBuilderField<double> {
 
   final DisplayValues displayValues;
 
+  /// A widget that is displayed at the start of the row.
+  ///
+  /// The [prefix] parameter is displayed at the start of the row. Standard iOS
+  /// guidelines encourage passing a [Text] widget to [prefix] to detail the
+  /// nature of the row's [child] widget. If null, the [child] widget will take
+  /// up all horizontal space in the row.
+  final Widget? prefix;
+
+  /// Content padding for the row.
+  ///
+  /// Defaults to the standard iOS padding for form rows. If no edge insets are
+  /// intended, explicitly pass [EdgeInsets.zero] to [contentPadding].
+  final EdgeInsetsGeometry? contentPadding;
+
+  /// A widget that is displayed underneath the [prefix] and [child] widgets.
+  ///
+  /// The [helper] appears in primary label coloring, and is meant to inform the
+  /// user about interaction with the child widget. The row becomes taller in
+  /// order to display the [helper] widget underneath [prefix] and [child]. If
+  /// null, the row is shorter.
+  final Widget? helper;
+
+  /// A builder widget that is displayed underneath the [prefix] and [child] widgets.
+  ///
+  /// The [error] widget is primarily used to inform users of input errors. When
+  /// a [Text] is given to [error], it will be shown in
+  /// [CupertinoColors.destructiveRed] coloring and medium-weighted font. The
+  /// row becomes taller in order to display the [helper] widget underneath
+  /// [prefix] and [child]. If null, the row is shorter.
+  final Widget? Function(String error)? errorBuilder;
+
   /// Creates field for selection of a numerical value on a slider
   FormBuilderCupertinoSlider({
     super.key,
     required super.name,
     super.validator,
     required double super.initialValue,
-    super.decoration,
     super.onChanged,
     super.valueTransformer,
     super.enabled,
@@ -154,58 +182,69 @@ class FormBuilderCupertinoSlider extends FormBuilderField<double> {
     this.maxValueWidget,
     this.minValueWidget,
     this.valueWidget,
+    this.errorBuilder,
+    this.helper,
+    this.contentPadding,
+    this.prefix,
   }) : super(
           builder: (FormFieldState<double?> field) {
             final state = field as _FormBuilderCupertinoSliderState;
             final effectiveNumberFormat =
                 numberFormat ?? NumberFormat.compact();
 
-            return CupertinoInputDecoration(
-              fieldState: state,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    child: CupertinoSlider(
-                      value: field.value!,
-                      min: min,
-                      max: max,
-                      divisions: divisions,
-                      activeColor: activeColor,
-                      onChangeEnd: onChangeEnd,
-                      onChangeStart: onChangeStart,
-                      onChanged: state.enabled
-                          ? (value) {
-                              field.didChange(value);
-                            }
-                          : null,
-                      thumbColor: thumbColor,
-                    ),
+            final fieldWidget = Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  child: CupertinoSlider(
+                    value: field.value!,
+                    min: min,
+                    max: max,
+                    divisions: divisions,
+                    activeColor: activeColor,
+                    onChangeEnd: onChangeEnd,
+                    onChangeStart: onChangeStart,
+                    onChanged: state.enabled
+                        ? (value) {
+                            field.didChange(value);
+                          }
+                        : null,
+                    thumbColor: thumbColor,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      if (displayValues != DisplayValues.none &&
-                          displayValues != DisplayValues.current)
-                        minValueWidget
-                                ?.call(effectiveNumberFormat.format(min)) ??
-                            Text(effectiveNumberFormat.format(min)),
-                      if (displayValues != DisplayValues.none &&
-                          displayValues != DisplayValues.minMax)
-                        valueWidget?.call(
-                                effectiveNumberFormat.format(field.value)) ??
-                            Text(effectiveNumberFormat.format(field.value)),
-                      if (displayValues != DisplayValues.none &&
-                          displayValues != DisplayValues.current)
-                        maxValueWidget
-                                ?.call(effectiveNumberFormat.format(max)) ??
-                            Text(effectiveNumberFormat.format(max)),
-                    ],
-                  ),
-                ],
-              ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    if (displayValues != DisplayValues.none &&
+                        displayValues != DisplayValues.current)
+                      minValueWidget?.call(effectiveNumberFormat.format(min)) ??
+                          Text(effectiveNumberFormat.format(min)),
+                    if (displayValues != DisplayValues.none &&
+                        displayValues != DisplayValues.minMax)
+                      valueWidget?.call(
+                              effectiveNumberFormat.format(field.value)) ??
+                          Text(effectiveNumberFormat.format(field.value)),
+                    if (displayValues != DisplayValues.none &&
+                        displayValues != DisplayValues.current)
+                      maxValueWidget?.call(effectiveNumberFormat.format(max)) ??
+                          Text(effectiveNumberFormat.format(max)),
+                  ],
+                ),
+              ],
+            );
+
+            return CupertinoFormRow(
+              error: state.hasError
+                  ? errorBuilder != null
+                      ? errorBuilder(state.errorText ?? '')
+                      : Text(state.errorText ?? '')
+                  : null,
+              helper: helper,
+              padding: contentPadding,
+              prefix: prefix,
+              child: fieldWidget,
             );
           },
         );
