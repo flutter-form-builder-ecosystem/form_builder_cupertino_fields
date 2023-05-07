@@ -221,6 +221,59 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
   /// no box decoration.
   final BoxDecoration? decoration;
 
+  /// Defines whether the field input expands to fill the entire width
+  /// of the row field.
+  ///
+  /// By default `false`
+  final bool shouldExpandedField;
+
+  /// A widget that is displayed at the start of the row.
+  ///
+  /// The [prefix] parameter is displayed at the start of the row. Standard iOS
+  /// guidelines encourage passing a [Text] widget to [prefix] to detail the
+  /// nature of the row's [child] widget. If null, the [child] widget will take
+  /// up all horizontal space in the row.
+  final Widget? prefix;
+
+  /// Content padding for the row.
+  ///
+  /// Defaults to the standard iOS padding for form rows. If no edge insets are
+  /// intended, explicitly pass [EdgeInsets.zero] to [contentPadding].
+  final EdgeInsetsGeometry? contentPadding;
+
+  /// A widget that is displayed underneath the [prefix] and [child] widgets.
+  ///
+  /// The [helper] appears in primary label coloring, and is meant to inform the
+  /// user about interaction with the child widget. The row becomes taller in
+  /// order to display the [helper] widget underneath [prefix] and [child]. If
+  /// null, the row is shorter.
+  final Widget? helper;
+
+  /// A builder widget that is displayed underneath the [prefix] and [child] widgets.
+  ///
+  /// The [error] widget is primarily used to inform users of input errors. When
+  /// a [Text] is given to [error], it will be shown in
+  /// [CupertinoColors.destructiveRed] coloring and medium-weighted font. The
+  /// row becomes taller in order to display the [helper] widget underneath
+  /// [prefix] and [child]. If null, the row is shorter.
+  final Widget? Function(String error)? errorBuilder;
+
+  /// {@macro flutter.widgets.editableText.scribbleEnabled}
+  final bool scribbleEnabled;
+
+  /// {@macro flutter.services.TextInputConfiguration.enableIMEPersonalizedLearning}
+  final bool enableIMEPersonalizedLearning;
+
+  /// Show an iOS-style clear button to clear the current text entry.
+  ///
+  /// Can be made to appear depending on various text states of the
+  /// [TextEditingController].
+  ///
+  /// Will only appear if no [suffix] widget is appearing.
+  ///
+  /// Defaults to never appearing and cannot be null.
+  final OverlayVisibilityMode clearButtonMode;
+
   FormBuilderCupertinoTextField({
     super.key,
     required super.name,
@@ -277,11 +330,40 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
     this.contextMenuBuilder = _defaultContextMenuBuilder,
     this.magnifierConfiguration,
     this.decoration,
-  }) : super(
+    this.shouldExpandedField = false,
+    this.errorBuilder,
+    this.helper,
+    this.contentPadding,
+    this.prefix,
+    this.enableIMEPersonalizedLearning = true,
+    this.scribbleEnabled = true,
+    this.clearButtonMode = OverlayVisibilityMode.never,
+  })  : assert(maxLines == null || maxLines > 0),
+        assert(minLines == null || minLines > 0),
+        assert(
+          (maxLines == null) || (minLines == null) || (maxLines >= minLines),
+          "minLines can't be greater than maxLines",
+        ),
+        assert(
+          !expands || (maxLines == null && minLines == null),
+          'minLines and maxLines must be null when expands is true.',
+        ),
+        assert(!obscureText || maxLines == 1,
+            'Obscured fields cannot be multiline.'),
+        assert(maxLength == null || maxLength > 0),
+        // Assert the following instead of setting it directly to avoid surprising the user by silently changing the value they set.
+        assert(
+          !identical(textInputAction, TextInputAction.newline) ||
+              maxLines == 1 ||
+              !identical(keyboardType, TextInputType.text),
+          'Use keyboardType TextInputType.multiline when using TextInputAction.newline on a multiline TextField.',
+        ),
+        super(
+          initialValue: controller != null ? controller.text : initialValue,
           builder: (FormFieldState<String?> field) {
             final state = field as _FormBuilderCupertinoTextFieldState;
 
-            return CupertinoTextField(
+            final fieldWidget = CupertinoTextField(
               restorationId: restorationId,
               controller: state._effectiveController,
               focusNode: state.effectiveFocusNode,
@@ -328,6 +410,23 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
               obscuringCharacter: obscuringCharacter,
               autofillHints: autofillHints,
               magnifierConfiguration: magnifierConfiguration,
+              enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+              scribbleEnabled: scribbleEnabled,
+              clearButtonMode: clearButtonMode,
+            );
+
+            return CupertinoFormRow(
+              error: state.hasError
+                  ? errorBuilder != null
+                      ? errorBuilder(state.errorText ?? '')
+                      : Text(state.errorText ?? '')
+                  : null,
+              helper: helper,
+              padding: contentPadding,
+              prefix: prefix,
+              child: shouldExpandedField
+                  ? SizedBox(width: double.infinity, child: fieldWidget)
+                  : fieldWidget,
             );
           },
         );
