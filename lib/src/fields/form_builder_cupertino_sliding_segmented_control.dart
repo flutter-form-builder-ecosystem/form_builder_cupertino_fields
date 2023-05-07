@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-/// Field for selection of a value from the `CupertinoSegmentedControl`
+/// Field with iOS-style segmented control bar using `CupertinoSlidingSegmentedControl`
 class FormBuilderCupertinoSlidingSegmentedControl<T extends Object>
     extends FormBuilderField<T> {
   /// The color used to fill the background of the selected widget and as the text

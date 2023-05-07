@@ -1,39 +1,104 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Form Builder Cupertino Fields
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+A extended of [flutter_form_builder](https://pub.dev/packages/flutter_form_builder) package with only Cupertino styles fields
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+[![Pub Version](https://img.shields.io/pub/v/form_builder_cupertino_fields?logo=flutter&style=for-the-badge)](https://pub.dev/packages/form_builder_cupertino_fields)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/flutter-form-builder-ecosystem/form_builder_cupertino_fields/base.yaml?branch=main&logo=github&style=for-the-badge)](https://github.com/flutter-form-builder-ecosystem/form_builder_cupertino_fields/actions/workflows/base.yaml)
+[![Codecov](https://img.shields.io/codecov/c/github/flutter-form-builder-ecosystem/form_builder_cupertino_fields?logo=codecov&style=for-the-badge)](https://codecov.io/gh/flutter-form-builder-ecosystem/form_builder_cupertino_fields/)
+[![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/flutter-form-builder-ecosystem/form_builder_cupertino_fields?logo=codefactor&style=for-the-badge)](https://www.codefactor.io/repository/github/flutter-form-builder-ecosystem/form_builder_cupertino_fields)
+___
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+- [Features](#features)
+- [Inputs](#inputs)
+- [Use](#use)
+  - [Setup](#setup)
+  - [Basic use](#basic-use)
+- [Support](#support)
+  - [Contribute](#contribute)
+  - [Questions and answers](#questions-and-answers)
+  - [Donations](#donations)
+- [Roadmap](#roadmap)
+- [Ecosystem](#ecosystem)
+- [Thanks to](#thanks-to)
+  - [Contributors](#contributors)
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Cupertino fields with `FormBuilderField` logic
+- Only cupertino dependencies, without material imports
 
-## Getting started
+## Inputs
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+The currently supported fields include:
 
-## Usage
+- `FormBuilderCupertinoSegmentedControl` - Segmented control using `CupertinoSegmentedControl`
+- `FormBuilderCupertinoSlidingSegmentedControl` - Segmented control bar using `CupertinoSlidingSegmentedControl`
+- `FormBuilderCupertinoSlider` - For selection of a numerical value on a slider
+- `FormBuilderCupertinoSwitch` - On/Off switch field
+- `FormBuilderCupertinoTextField` - A text field input
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+
+## Use
+
+### Setup
+
+No specific setup required: only install the dependency and use :)
+
+### Basic use
 
 ```dart
-const like = 'sample';
+final _formKey = GlobalKey<FormBuilderState>();
+
+FormBuilder(
+    key: _formKey,
+    child:  FormBuilderCupertinoTextField(
+        name: 'text',
+        onChanged: (val) {
+            print(val); // Print the text value write into TextField
+        },
+    ),
+)
 ```
 
-## Additional information
+See [pub.dev example tab](https://pub.dev/packages/form_builder_cupertino_fields/example) or [github code](example/lib/main.dart) for more details
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+
+## Support
+
+### Contribute
+
+You have some ways to contribute to this packages
+
+- Beginner: Reporting bugs or request new features
+- Intermediate: Implement new features (from issues or not) and created pull requests
+- Advanced: Join to [organization](#ecosystem) like a member and help coding, manage issues, dicuss new features and other things
+
+ See [contribution file](https://github.com/flutter-form-builder-ecosystem/.github/blob/main/CONTRIBUTING.md) for more details
+
+### Questions and answers
+
+You can question or search answers on [Github discussion](https://github.com/flutter-form-builder-ecosystem/form_builder_cupertino_fields/discussions) or on [StackOverflow](https://stackoverflow.com/questions/tagged/flutter-form-builder)
+
+### Donations
+
+Donate or become a sponsor of Flutter Form Builder Ecosystem
+
+[![Become a Sponsor](https://opencollective.com/flutter-form-builder-ecosystem/tiers/sponsor.svg?avatarHeight=56)](https://opencollective.com/flutter-form-builder-ecosystem)
+
+## Roadmap
+
+- Add more Cupertino fields
+
+## Ecosystem
+
+Take a look to [our awesome ecosystem](https://github.com/flutter-form-builder-ecosystem) and all packages in there
+
+## Thanks to
+
+### Contributors
+
+<a href="https://github.com/flutter-form-builder-ecosystem/form_builder_cupertino_fields/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=flutter-form-builder-ecosystem/form_builder_cupertino_fields" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
