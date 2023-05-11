@@ -1,3 +1,7 @@
+## 0.1.0
+
+* Release beta package
+
 ## 0.0.1-dev.3
 
 * Update constraints to Dart 3
