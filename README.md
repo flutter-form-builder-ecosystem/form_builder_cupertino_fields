@@ -20,7 +20,6 @@ ___
 - [Roadmap](#roadmap)
 - [Ecosystem](#ecosystem)
 - [Thanks to](#thanks-to)
-  - [Contributors](#contributors)
 
 ## Features
 
@@ -36,7 +35,6 @@ The currently supported fields include:
 - `FormBuilderCupertinoSlider` - For selection of a numerical value on a slider
 - `FormBuilderCupertinoSwitch` - On/Off switch field
 - `FormBuilderCupertinoTextField` - A text field input
-
 
 ## Use
 
@@ -61,7 +59,6 @@ FormBuilder(
 ```
 
 See [pub.dev example tab](https://pub.dev/packages/form_builder_cupertino_fields/example) or [github code](example/lib/main.dart) for more details
-
 
 ## Support
 
@@ -95,10 +92,4 @@ Take a look to [our awesome ecosystem](https://github.com/flutter-form-builder-e
 
 ## Thanks to
 
-### Contributors
-
-<a href="https://github.com/flutter-form-builder-ecosystem/form_builder_cupertino_fields/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=flutter-form-builder-ecosystem/form_builder_cupertino_fields" />
-</a>
-
-Made with [contrib.rocks](https://contrib.rocks).
+[All constributors](https://github.com/flutter-form-builder-ecosystem/form_builder_cupertino_fields/graphs/contributors)
