@@ -274,6 +274,9 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
   /// Defaults to never appearing and cannot be null.
   final OverlayVisibilityMode clearButtonMode;
 
+  /// {@macro flutter.widgets.editableText.contentInsertionConfiguration}
+  final ContentInsertionConfiguration? contentInsertionConfiguration;
+
   FormBuilderCupertinoTextField({
     super.key,
     required super.name,
@@ -338,6 +341,7 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
     this.enableIMEPersonalizedLearning = true,
     this.scribbleEnabled = true,
     this.clearButtonMode = OverlayVisibilityMode.never,
+    this.contentInsertionConfiguration,
   })  : assert(maxLines == null || maxLines > 0),
         assert(minLines == null || minLines > 0),
         assert(
@@ -413,6 +417,7 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
               enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
               scribbleEnabled: scribbleEnabled,
               clearButtonMode: clearButtonMode,
+              contentInsertionConfiguration: contentInsertionConfiguration,
             );
 
             return CupertinoFormRow(
