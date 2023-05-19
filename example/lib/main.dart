@@ -41,6 +41,11 @@ class _MyHomePageState extends State<MyHomePage> {
           key: _formKey,
           child: Column(
             children: [
+              FormBuilderCupertinoCheckbox(
+                name: 'checkbox',
+                prefix: const Text('Select/Unselect'),
+              ),
+              const SizedBox(height: 16),
               FormBuilderCupertinoSegmentedControl<int>(
                 name: 'segmented_control',
                 shouldExpandedField: true,

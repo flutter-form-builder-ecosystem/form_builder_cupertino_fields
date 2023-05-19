@@ -30,6 +30,7 @@ ___
 
 The currently supported fields include:
 
+- `FormBuilderCupertinoCheckbox` - Single checkbox field
 - `FormBuilderCupertinoSegmentedControl` - Segmented control using `CupertinoSegmentedControl`
 - `FormBuilderCupertinoSlidingSegmentedControl` - Segmented control bar using `CupertinoSlidingSegmentedControl`
 - `FormBuilderCupertinoSlider` - For selection of a numerical value on a slider
