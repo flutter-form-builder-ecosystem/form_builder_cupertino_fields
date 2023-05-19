@@ -1,3 +1,7 @@
+## 0.2.0
+
+* Added `FormBuilderCupertinoCheckbox`
+
 ## 0.1.0
 
 * Release beta package
