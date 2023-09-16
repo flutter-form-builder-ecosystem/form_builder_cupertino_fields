@@ -1,3 +1,8 @@
+## 0.2.1
+
+* Update dependencies
+* Built with Flutter 3.13
+
 ## 0.2.0
 
 * Added `FormBuilderCupertinoCheckbox`
