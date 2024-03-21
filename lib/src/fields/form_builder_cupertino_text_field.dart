@@ -63,6 +63,26 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
   /// {@macro flutter.services.textInput.enableSuggestions}
   final bool enableSuggestions;
 
+  /// A lighter colored placeholder hint that appears on the first line of the
+  /// text field when the text entry is empty.
+  ///
+  /// Defaults to having no placeholder text.
+  ///
+  /// The text style of the placeholder text matches that of the text field's
+  /// main text entry except a lighter font weight and a grey font color.
+  final String? placeholder;
+
+  /// The style to use for the placeholder text.
+  ///
+  /// The [placeholderStyle] is merged with the [style] [TextStyle] when applied
+  /// to the [placeholder] text. To avoid merging with [style], specify
+  /// [TextStyle.inherit] as false.
+  ///
+  /// Defaults to the [style] property with w300 font weight and grey color.
+  ///
+  /// If specifically set to null, placeholder's style will be the same as [style].
+  final TextStyle? placeholderStyle;
+
   /// {@macro flutter.widgets.editableText.maxLines}
   final int? maxLines;
 
@@ -342,6 +362,8 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
     this.scribbleEnabled = true,
     this.clearButtonMode = OverlayVisibilityMode.never,
     this.contentInsertionConfiguration,
+    this.placeholder,
+    this.placeholderStyle
   })  : assert(maxLines == null || maxLines > 0),
         assert(minLines == null || minLines > 0),
         assert(
@@ -386,6 +408,8 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
               obscureText: obscureText,
               autocorrect: autocorrect,
               enableSuggestions: enableSuggestions,
+              placeholder: placeholder,
+              placeholderStyle: placeholderStyle,
               maxLengthEnforcement: maxLengthEnforcement,
               maxLines: maxLines,
               minLines: minLines,
