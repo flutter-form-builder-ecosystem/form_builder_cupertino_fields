@@ -16,7 +16,10 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1 # Use shallow clone for faster checkout
 
       - name: Check broken links
         uses: JustinBeckwith/linkinator-action@v1
@@ -24,15 +27,25 @@ jobs:
           paths: "**/*.md"
 
       - name: Setup Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '11'
 
+      - name: Get Flutter version by FVM
+        uses: kuhnroyal/flutter-fvm-config-action@v2
+        id: fvm-config-action
+        with:
+          path: ".fvmrc"
+          flavor: "stable"
+
       - name: Flutter action
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+          channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
+          architecture: x64
+          cache: true
 
       - name: Install dependencies
         run: flutter pub get
@@ -41,14 +54,16 @@ jobs:
       - name: Analyze static code
         run: flutter analyze
       - name: Run tests
-        run: flutter test --coverage
+        run: flutter test --no-pub --coverage
+      - name: Check publish warnings
+        run: dart pub publish --dry-run
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         with:
           files: coverage/lcov.info
           name: form_builder_cupertino_fields
-      - name: Check publish warnings
-        run: dart pub publish --dry-run
       - name: Build example
         run: |
           cd example
@@ -65,10 +80,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1 # Use shallow clone for faster checkout
       - uses: dart-lang/setup-dart@v1
-      - name: Flutter action
+
+      - name: Get Flutter version by FVM
+        uses: kuhnroyal/flutter-fvm-config-action@v2
+        id: fvm-config-action
+        with:
+          path: ".fvmrc"
+          flavor: "stable"
+
+      - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+          channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
+          architecture: x64
+          cache: true
       - name: Publish package
         run: dart pub publish -v -f
