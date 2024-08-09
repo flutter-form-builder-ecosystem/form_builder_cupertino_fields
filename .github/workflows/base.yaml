@@ -38,7 +38,6 @@ jobs:
         id: fvm-config-action
         with:
           path: ".fvmrc"
-          flavor: "stable"
 
       - name: Flutter action
         uses: subosito/flutter-action@v2
@@ -90,7 +89,6 @@ jobs:
         id: fvm-config-action
         with:
           path: ".fvmrc"
-          flavor: "stable"
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
