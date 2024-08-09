@@ -1,3 +1,11 @@
+# 0.3.0
+
+* `FormBuilderCupertinoTextField` add placeholder and placeholderStyle
+* Update to use 0.19.0 of intl package
+* Update android settings on example
+* Set minimal Flutter version to 3.22.0
+* Set minimal Dart version to 3.4.0
+
 ## 0.2.1
 
 * Update dependencies
