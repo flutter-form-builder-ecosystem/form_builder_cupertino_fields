@@ -363,7 +363,7 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
     this.clearButtonMode = OverlayVisibilityMode.never,
     this.contentInsertionConfiguration,
     this.placeholder,
-    this.placeholderStyle
+    this.placeholderStyle,
   })  : assert(maxLines == null || maxLines > 0),
         assert(minLines == null || minLines > 0),
         assert(
