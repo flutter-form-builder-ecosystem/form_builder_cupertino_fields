@@ -13,7 +13,8 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    name: Build package & run tests
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
