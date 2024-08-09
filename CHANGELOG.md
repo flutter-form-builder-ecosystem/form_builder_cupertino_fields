@@ -1,3 +1,8 @@
+# 0.4.0
+
+* Set minimal Flutter version to 3.24.0
+* Set minimal Dart version to 3.5.0
+
 # 0.3.0
 
 * `FormBuilderCupertinoTextField` add placeholder and placeholderStyle
