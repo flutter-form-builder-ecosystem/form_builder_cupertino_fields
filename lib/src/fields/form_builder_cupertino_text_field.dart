@@ -146,6 +146,9 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
   ///    [TextInputAction.previous] for [textInputAction].
   final ValueChanged<String?>? onSubmitted;
 
+  /// {@macro flutter.widgets.editableText.onTapOutside}
+  final TapRegionCallback? onTapOutside;
+
   /// {@macro flutter.widgets.editableText.inputFormatters}
   final List<TextInputFormatter>? inputFormatters;
 
@@ -339,6 +342,7 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
     this.minLines,
     this.showCursor,
     this.onTap,
+    this.onTapOutside,
     this.enableSuggestions = false,
     this.textAlignVertical,
     this.dragStartBehavior = DragStartBehavior.start,
@@ -416,6 +420,7 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
               expands: expands,
               maxLength: maxLength,
               onTap: onTap,
+              onTapOutside: onTapOutside,
               onEditingComplete: onEditingComplete,
               onSubmitted: onSubmitted,
               inputFormatters: inputFormatters,
