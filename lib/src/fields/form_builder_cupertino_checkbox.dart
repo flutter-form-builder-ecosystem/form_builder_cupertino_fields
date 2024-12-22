@@ -45,10 +45,13 @@ class FormBuilderCupertinoCheckbox extends FormBuilderField<bool> {
   /// [prefix] and [child]. If null, the row is shorter.
   final Widget? Function(String error)? errorBuilder;
 
-  /// The color to use when this radio button is not selected.
+  /// {@macro flutter.cupertino.CupertinoCheckbox.fillColor}
   ///
-  /// Defaults to [CupertinoColors.white].
-  final Color? inactiveColor;
+  /// If [fillColor] resolves to null for the requested state, then the fill color
+  /// falls back to [activeColor] if the state includes [WidgetState.selected],
+  /// [CupertinoColors.white] at 50% opacity if checkbox is disabled,
+  /// and [CupertinoColors.white] otherwise.
+  final WidgetStateProperty<Color?>? fillColor;
 
   /// The color for the radio's border when it has the input focus.
   ///
@@ -85,6 +88,40 @@ class FormBuilderCupertinoCheckbox extends FormBuilderField<bool> {
   /// [RoundedRectangleBorder] with a circular corner radius of 4.0.
   final OutlinedBorder? shape;
 
+  /// The semantic label for the checkbox that will be announced by screen readers.
+  ///
+  /// This is announced by assistive technologies (e.g TalkBack/VoiceOver).
+  ///
+  /// This label does not show in the UI.
+  final String? semanticLabel;
+
+  /// {@macro flutter.widgets.Focus.autofocus}
+  final bool autofocus;
+
+  /// The cursor for a mouse pointer when it enters or is hovering over the
+  /// widget.
+  ///
+  /// If [mouseCursor] is a [WidgetStateMouseCursor],
+  /// [WidgetStateProperty.resolve] is used for the following [WidgetState]s:
+  ///
+  ///  * [WidgetState.selected].
+  ///  * [WidgetState.focused].
+  ///  * [WidgetState.disabled].
+  ///
+  /// When [value] is null and [tristate] is true, [WidgetState.selected] is
+  /// included as a state.
+  ///
+  /// If null, then [SystemMouseCursors.basic] is used when this checkbox is
+  /// disabled. When the checkbox is enabled, [SystemMouseCursors.click] is used
+  /// on Web, and [SystemMouseCursors.basic] is used on other platforms.
+  ///
+  /// See also:
+  ///
+  ///  * [WidgetStateMouseCursor], a [MouseCursor] that implements
+  ///    [WidgetStateProperty] which is used in APIs that need to accept
+  ///    either a [MouseCursor] or a [WidgetStateProperty].
+  final MouseCursor? mouseCursor;
+
   /// Creates On/Off Cupertino switch field
   FormBuilderCupertinoCheckbox({
     super.key,
@@ -106,11 +143,14 @@ class FormBuilderCupertinoCheckbox extends FormBuilderField<bool> {
     this.contentPadding,
     this.prefix,
     this.focusColor,
-    this.inactiveColor,
+    this.fillColor,
     this.checkColor,
     this.shape,
     this.side,
     this.tristate = false,
+    this.semanticLabel,
+    this.autofocus = false,
+    this.mouseCursor,
   }) : super(
           builder: (FormFieldState<bool?> field) {
             final state = field as _FormBuilderCupertinoCheckboxState;
@@ -118,12 +158,15 @@ class FormBuilderCupertinoCheckbox extends FormBuilderField<bool> {
             final fieldWidget = CupertinoCheckbox(
               focusColor: focusColor,
               focusNode: state.effectiveFocusNode,
-              inactiveColor: inactiveColor,
+              fillColor: fillColor,
               value: state.value ?? false,
               checkColor: checkColor,
               shape: shape,
               side: side,
               tristate: tristate,
+              autofocus: autofocus,
+              mouseCursor: mouseCursor,
+              semanticLabel: semanticLabel,
               onChanged: state.enabled
                   ? (value) {
                       field.didChange(value);
