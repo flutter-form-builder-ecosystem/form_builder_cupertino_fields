@@ -8,6 +8,8 @@ import 'package:intl/intl.dart';
 
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
+/**************** START Imported from flutter/material.dart ****************/
+
 /// Initial display of a calendar date picker.
 ///
 /// Either a grid of available years or a monthly calendar.
@@ -91,10 +93,9 @@ enum DatePickerEntryMode {
   /// There is no user interface to switch to another mode.
   inputOnly,
 }
+/**************** START Imported from flutter/material.dart ****************/
 
-enum InputType { date, time, both }
-
-/// Field for `Date`, `Time` and `DateTime` input
+/// A [CupertinoDateTimePicker] that integrates with [FormBuilder].
 class FormBuilderCupertinoDateTimePicker extends FormBuilderField<DateTime> {
   /// The date/time picker dialogs to show.
   final InputType inputType;
@@ -154,6 +155,49 @@ class FormBuilderCupertinoDateTimePicker extends FormBuilderField<DateTime> {
   final TextAlign textAlign;
   final TextAlignVertical? textAlignVertical;
 
+  /// Defines whether the field input expands to fill the entire width
+  /// of the row field.
+  ///
+  /// By default `false`
+  final bool shouldExpandedField;
+
+  /// Controls the [BoxDecoration] of the box behind the text input.
+  ///
+  /// Defaults to having a rounded rectangle grey border and can be null to have
+  /// no box decoration.
+  final BoxDecoration? decoration;
+
+  /// A widget that is displayed at the start of the row.
+  ///
+  /// The [prefix] parameter is displayed at the start of the row. Standard iOS
+  /// guidelines encourage passing a [Text] widget to [prefix] to detail the
+  /// nature of the row's [child] widget. If null, the [child] widget will take
+  /// up all horizontal space in the row.
+  final Widget? prefix;
+
+  /// Content padding for the row.
+  ///
+  /// Defaults to the standard iOS padding for form rows. If no edge insets are
+  /// intended, explicitly pass [EdgeInsets.zero] to [contentPadding].
+  final EdgeInsetsGeometry? contentPadding;
+
+  /// A widget that is displayed underneath the [prefix] and [child] widgets.
+  ///
+  /// The [helper] appears in primary label coloring, and is meant to inform the
+  /// user about interaction with the child widget. The row becomes taller in
+  /// order to display the [helper] widget underneath [prefix] and [child]. If
+  /// null, the row is shorter.
+  final Widget? helper;
+
+  /// A builder widget that is displayed underneath the [prefix] and [child] widgets.
+  ///
+  /// The [error] widget is primarily used to inform users of input errors. When
+  /// a [Text] is given to [error], it will be shown in
+  /// [CupertinoColors.destructiveRed] coloring and medium-weighted font. The
+  /// row becomes taller in order to display the [helper] widget underneath
+  /// [prefix] and [child]. If null, the row is shorter.
+  final Widget? Function(String error)? errorBuilder;
+
   /// Preset the widget's value.
   final bool autofocus;
   final bool obscureText;
@@ -188,17 +232,9 @@ class FormBuilderCupertinoDateTimePicker extends FormBuilderField<DateTime> {
   final double cursorWidth;
   final TextCapitalization textCapitalization;
 
-  final String? cancelText;
-  final String? confirmText;
-  final String? errorFormatText;
-  final String? errorInvalidText;
-  final String? fieldHintText;
-  final String? fieldLabelText;
-  final String? helpText;
   final DatePickerEntryMode initialEntryMode;
   final RouteSettings? routeSettings;
 
-  final TimePickerEntryMode timePickerInitialEntryMode;
   final StrutStyle? strutStyle;
   final bool Function(DateTime day)? selectableDayPredicate;
   final Offset? anchorPoint;
@@ -226,6 +262,12 @@ class FormBuilderCupertinoDateTimePicker extends FormBuilderField<DateTime> {
     this.initialTime = const TimeOfDay(hour: 12, minute: 0),
     this.keyboardType,
     this.textAlign = TextAlign.start,
+    this.shouldExpandedField = false,
+    this.decoration,
+    this.prefix,
+    this.contentPadding,
+    this.helper,
+    this.errorBuilder,
     this.autofocus = false,
     this.obscureText = false,
     this.autocorrect = true,
@@ -236,7 +278,6 @@ class FormBuilderCupertinoDateTimePicker extends FormBuilderField<DateTime> {
     this.textCapitalization = TextCapitalization.none,
     this.useRootNavigator = true,
     this.initialEntryMode = DatePickerEntryMode.calendar,
-    this.timePickerInitialEntryMode = TimePickerEntryMode.dial,
     this.format,
     this.initialDate,
     this.firstDate,
@@ -258,13 +299,6 @@ class FormBuilderCupertinoDateTimePicker extends FormBuilderField<DateTime> {
     this.cursorRadius = const Radius.circular(2.0),
     this.cursorColor,
     this.keyboardAppearance,
-    this.cancelText,
-    this.confirmText,
-    this.errorFormatText,
-    this.errorInvalidText,
-    this.fieldHintText,
-    this.fieldLabelText,
-    this.helpText,
     this.routeSettings,
     this.strutStyle,
     this.selectableDayPredicate,
@@ -275,7 +309,7 @@ class FormBuilderCupertinoDateTimePicker extends FormBuilderField<DateTime> {
           builder: (FormFieldState<DateTime?> field) {
             final state = field as _FormBuilderCupertinoDateTimePickerState;
 
-            return FocusTraversalGroup(
+            final fieldWidget = FocusTraversalGroup(
               policy: ReadingOrderTraversalPolicy(),
               child: CupertinoTextField(
                 onTap: () => state.showPicker(),
@@ -284,7 +318,7 @@ class FormBuilderCupertinoDateTimePicker extends FormBuilderField<DateTime> {
                 textAlignVertical: textAlignVertical,
                 maxLength: maxLength,
                 autofocus: autofocus,
-                // FIXME: decoration: state.decoration,
+                decoration: decoration,
                 readOnly: true,
                 enabled: state.enabled,
                 autocorrect: autocorrect,
@@ -310,6 +344,20 @@ class FormBuilderCupertinoDateTimePicker extends FormBuilderField<DateTime> {
                 textInputAction: textInputAction,
                 maxLengthEnforcement: maxLengthEnforcement,
               ),
+            );
+
+            return CupertinoFormRow(
+              error: state.hasError
+                  ? errorBuilder != null
+                      ? errorBuilder(state.errorText ?? '')
+                      : Text(state.errorText ?? '')
+                  : null,
+              helper: helper,
+              padding: contentPadding,
+              prefix: prefix,
+              child: shouldExpandedField
+                  ? SizedBox(width: double.infinity, child: fieldWidget)
+                  : fieldWidget,
             );
           },
         );

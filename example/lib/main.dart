@@ -104,8 +104,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 const SizedBox(height: 16),
                 FormBuilderCupertinoDateTimePicker(
                   name: 'date',
+                  prefix: const Icon(CupertinoIcons.calendar),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) => value != null ? null : 'Required date',
+                  initialValue: DateTime.now(),
                 ),
               ],
             ),
