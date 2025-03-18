@@ -284,6 +284,9 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
   /// {@macro flutter.widgets.editableText.scribbleEnabled}
   final bool scribbleEnabled;
 
+  /// {@macro flutter.widgets.editableText.stylusHandwritingEnabled}
+  final bool stylusHandwritingEnabled;
+
   /// {@macro flutter.services.TextInputConfiguration.enableIMEPersonalizedLearning}
   final bool enableIMEPersonalizedLearning;
 
@@ -299,6 +302,29 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
 
   /// {@macro flutter.widgets.editableText.contentInsertionConfiguration}
   final ContentInsertionConfiguration? contentInsertionConfiguration;
+
+  /// {@macro flutter.widgets.undoHistory.controller}
+  final UndoHistoryController? undoController;
+
+  /// {@macro flutter.widgets.editableText.selectionControls}
+  final TextSelectionControls? selectionControls;
+
+  /// {@macro flutter.widgets.editableText.groupId}
+  final Object groupId;
+
+  /// {@macro flutter.widgets.EditableText.spellCheckConfiguration}
+  ///
+  /// If [SpellCheckConfiguration.misspelledTextStyle] is not specified in this
+  /// configuration, then [cupertinoMisspelledTextStyle] is used by default.
+  final SpellCheckConfiguration? spellCheckConfiguration;
+
+  /// {@macro flutter.material.Material.clipBehavior}
+  ///
+  /// Defaults to [Clip.hardEdge].
+  final Clip clipBehavior;
+
+  /// {@macro flutter.widgets.editableText.cursorOpacityAnimates}
+  final bool cursorOpacityAnimates;
 
   FormBuilderCupertinoTextField({
     super.key,
@@ -363,107 +389,129 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
     this.contentPadding,
     this.prefix,
     this.enableIMEPersonalizedLearning = true,
+    this.undoController,
+    this.selectionControls,
+    this.groupId = EditableText,
+    this.spellCheckConfiguration,
+    this.clipBehavior = Clip.hardEdge,
+    this.cursorOpacityAnimates = true,
+    @Deprecated(
+      'Use `stylusHandwritingEnabled` instead. '
+      'This feature was deprecated after v3.27.0-0.2.pre.',
+    )
     this.scribbleEnabled = true,
+    this.stylusHandwritingEnabled =
+        EditableText.defaultStylusHandwritingEnabled,
     this.clearButtonMode = OverlayVisibilityMode.never,
     this.contentInsertionConfiguration,
     this.placeholder,
     this.placeholderStyle,
-  })  : assert(maxLines == null || maxLines > 0),
-        assert(minLines == null || minLines > 0),
-        assert(
-          (maxLines == null) || (minLines == null) || (maxLines >= minLines),
-          "minLines can't be greater than maxLines",
-        ),
-        assert(
-          !expands || (maxLines == null && minLines == null),
-          'minLines and maxLines must be null when expands is true.',
-        ),
-        assert(!obscureText || maxLines == 1,
-            'Obscured fields cannot be multiline.'),
-        assert(maxLength == null || maxLength > 0),
-        // Assert the following instead of setting it directly to avoid surprising the user by silently changing the value they set.
-        assert(
-          !identical(textInputAction, TextInputAction.newline) ||
-              maxLines == 1 ||
-              !identical(keyboardType, TextInputType.text),
-          'Use keyboardType TextInputType.multiline when using TextInputAction.newline on a multiline TextField.',
-        ),
-        super(
-          initialValue: controller != null ? controller.text : initialValue,
-          builder: (FormFieldState<String?> field) {
-            final state = field as _FormBuilderCupertinoTextFieldState;
+  }) : assert(maxLines == null || maxLines > 0),
+       assert(minLines == null || minLines > 0),
+       assert(
+         (maxLines == null) || (minLines == null) || (maxLines >= minLines),
+         "minLines can't be greater than maxLines",
+       ),
+       assert(
+         !expands || (maxLines == null && minLines == null),
+         'minLines and maxLines must be null when expands is true.',
+       ),
+       assert(
+         !obscureText || maxLines == 1,
+         'Obscured fields cannot be multiline.',
+       ),
+       assert(maxLength == null || maxLength > 0),
+       // Assert the following instead of setting it directly to avoid surprising the user by silently changing the value they set.
+       assert(
+         !identical(textInputAction, TextInputAction.newline) ||
+             maxLines == 1 ||
+             !identical(keyboardType, TextInputType.text),
+         'Use keyboardType TextInputType.multiline when using TextInputAction.newline on a multiline TextField.',
+       ),
+       super(
+         initialValue: controller != null ? controller.text : initialValue,
+         builder: (FormFieldState<String?> field) {
+           final state = field as _FormBuilderCupertinoTextFieldState;
 
-            final fieldWidget = CupertinoTextField(
-              restorationId: restorationId,
-              controller: state._effectiveController,
-              focusNode: state.effectiveFocusNode,
-              decoration: decoration,
-              keyboardType: keyboardType,
-              textInputAction: textInputAction,
-              style: style,
-              strutStyle: strutStyle,
-              textAlign: textAlign,
-              textAlignVertical: textAlignVertical,
-              textDirection: textDirection,
-              textCapitalization: textCapitalization,
-              autofocus: autofocus,
-              readOnly: readOnly,
-              showCursor: showCursor,
-              obscureText: obscureText,
-              autocorrect: autocorrect,
-              enableSuggestions: enableSuggestions,
-              placeholder: placeholder,
-              placeholderStyle: placeholderStyle,
-              maxLengthEnforcement: maxLengthEnforcement,
-              maxLines: maxLines,
-              minLines: minLines,
-              expands: expands,
-              maxLength: maxLength,
-              onTap: onTap,
-              onTapOutside: onTapOutside,
-              onEditingComplete: onEditingComplete,
-              onSubmitted: onSubmitted,
-              inputFormatters: inputFormatters,
-              enabled: state.enabled,
-              cursorWidth: cursorWidth,
-              cursorHeight: cursorHeight,
-              cursorRadius: cursorRadius,
-              cursorColor: cursorColor,
-              scrollPadding: scrollPadding,
-              keyboardAppearance: keyboardAppearance,
-              enableInteractiveSelection: enableInteractiveSelection,
-              dragStartBehavior: dragStartBehavior,
-              scrollController: scrollController,
-              scrollPhysics: scrollPhysics,
-              selectionHeightStyle: selectionHeightStyle,
-              selectionWidthStyle: selectionWidthStyle,
-              smartDashesType: smartDashesType,
-              smartQuotesType: smartQuotesType,
-              contextMenuBuilder: contextMenuBuilder,
-              obscuringCharacter: obscuringCharacter,
-              autofillHints: autofillHints,
-              magnifierConfiguration: magnifierConfiguration,
-              enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
-              scribbleEnabled: scribbleEnabled,
-              clearButtonMode: clearButtonMode,
-              contentInsertionConfiguration: contentInsertionConfiguration,
-            );
+           final fieldWidget = CupertinoTextField(
+             restorationId: restorationId,
+             controller: state._effectiveController,
+             focusNode: state.effectiveFocusNode,
+             decoration: decoration,
+             keyboardType: keyboardType,
+             textInputAction: textInputAction,
+             style: style,
+             strutStyle: strutStyle,
+             textAlign: textAlign,
+             textAlignVertical: textAlignVertical,
+             textDirection: textDirection,
+             textCapitalization: textCapitalization,
+             autofocus: autofocus,
+             readOnly: readOnly,
+             showCursor: showCursor,
+             obscureText: obscureText,
+             autocorrect: autocorrect,
+             enableSuggestions: enableSuggestions,
+             placeholder: placeholder,
+             placeholderStyle: placeholderStyle,
+             maxLengthEnforcement: maxLengthEnforcement,
+             maxLines: maxLines,
+             minLines: minLines,
+             expands: expands,
+             maxLength: maxLength,
+             onTap: onTap,
+             onTapOutside: onTapOutside,
+             onEditingComplete: onEditingComplete,
+             onSubmitted: onSubmitted,
+             inputFormatters: inputFormatters,
+             enabled: state.enabled,
+             cursorWidth: cursorWidth,
+             cursorHeight: cursorHeight,
+             cursorRadius: cursorRadius,
+             cursorColor: cursorColor,
+             scrollPadding: scrollPadding,
+             keyboardAppearance: keyboardAppearance,
+             enableInteractiveSelection: enableInteractiveSelection,
+             dragStartBehavior: dragStartBehavior,
+             scrollController: scrollController,
+             scrollPhysics: scrollPhysics,
+             selectionHeightStyle: selectionHeightStyle,
+             selectionWidthStyle: selectionWidthStyle,
+             smartDashesType: smartDashesType,
+             smartQuotesType: smartQuotesType,
+             contextMenuBuilder: contextMenuBuilder,
+             obscuringCharacter: obscuringCharacter,
+             autofillHints: autofillHints,
+             magnifierConfiguration: magnifierConfiguration,
+             enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+             stylusHandwritingEnabled: stylusHandwritingEnabled,
+             undoController: undoController,
+             selectionControls: selectionControls,
+             groupId: groupId,
+             spellCheckConfiguration: spellCheckConfiguration,
+             clipBehavior: clipBehavior,
+             cursorOpacityAnimates: cursorOpacityAnimates,
+             clearButtonMode: clearButtonMode,
+             contentInsertionConfiguration: contentInsertionConfiguration,
+           );
 
-            return CupertinoFormRow(
-              error: state.hasError
-                  ? errorBuilder != null
-                      ? errorBuilder(state.errorText ?? '')
-                      : Text(state.errorText ?? '')
-                  : null,
-              helper: helper,
-              padding: contentPadding,
-              prefix: prefix,
-              child: shouldExpandedField
-                  ? SizedBox(width: double.infinity, child: fieldWidget)
-                  : fieldWidget,
-            );
-          },
-        );
+           return CupertinoFormRow(
+             error:
+                 state.hasError
+                     ? errorBuilder != null
+                         ? errorBuilder(state.errorText ?? '')
+                         : Text(state.errorText ?? '')
+                     : null,
+             helper: helper,
+             padding: contentPadding,
+             prefix: prefix,
+             child:
+                 shouldExpandedField
+                     ? SizedBox(width: double.infinity, child: fieldWidget)
+                     : fieldWidget,
+           );
+         },
+       );
 
   static Widget _defaultContextMenuBuilder(
     BuildContext context,

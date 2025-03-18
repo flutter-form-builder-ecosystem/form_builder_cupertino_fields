@@ -11,15 +11,20 @@ void main() {
     const double unit = CupertinoThumbPainter.radius;
     const double delta = 3.0 * unit;
     return tester.dragFrom(
-        topLeft + const Offset(unit, unit), const Offset(delta, 0.0));
+      topLeft + const Offset(unit, unit),
+      const Offset(delta, 0.0),
+    );
   }
 
   group('initialValue -', () {
-    testWidgets('should initial value when set initialValue',
-        (WidgetTester tester) async {
+    testWidgets('should initial value when set initialValue', (
+      WidgetTester tester,
+    ) async {
       const widgetName = 'sc1';
-      final switchKey = GlobalKey<
-          FormBuilderFieldState<FormBuilderCupertinoSlider, double>>();
+      final switchKey =
+          GlobalKey<
+            FormBuilderFieldState<FormBuilderCupertinoSlider, double>
+          >();
       final testWidget = FormBuilderCupertinoSlider(
         name: widgetName,
         max: 100,
@@ -34,20 +39,23 @@ void main() {
   });
 
   group('errors -', () {
-    testWidgets('should error text when value is bigger than 0',
-        (WidgetTester tester) async {
+    testWidgets('should error text when value is bigger than 0', (
+      WidgetTester tester,
+    ) async {
       const widgetName = 'sc1';
       const errorTextField = 'error text field';
-      final switchKey = GlobalKey<
-          FormBuilderFieldState<FormBuilderCupertinoSlider, double>>();
+      final switchKey =
+          GlobalKey<
+            FormBuilderFieldState<FormBuilderCupertinoSlider, double>
+          >();
       final testWidget = FormBuilderCupertinoSlider(
         name: widgetName,
         key: switchKey,
         max: 10,
         min: 0,
         initialValue: 0,
-        validator: (value) =>
-            value == null || value <= 0 ? errorTextField : null,
+        validator:
+            (value) => value == null || value <= 0 ? errorTextField : null,
       );
       await tester.pumpWidget(buildTestableFieldWidget(testWidget));
 
@@ -64,12 +72,15 @@ void main() {
 
       expect(find.text(errorTextField), findsNothing);
     });
-    testWidgets('should custom error text when invalidate field',
-        (WidgetTester tester) async {
+    testWidgets('should custom error text when invalidate field', (
+      WidgetTester tester,
+    ) async {
       const widgetName = 'sc1';
       const errorTextField = 'error text field';
-      final switchKey = GlobalKey<
-          FormBuilderFieldState<FormBuilderCupertinoSlider, double>>();
+      final switchKey =
+          GlobalKey<
+            FormBuilderFieldState<FormBuilderCupertinoSlider, double>
+          >();
       final testWidget = FormBuilderCupertinoSlider(
         name: widgetName,
         key: switchKey,
@@ -84,11 +95,14 @@ void main() {
 
       expect(find.text(errorTextField), findsOneWidget);
     });
-    testWidgets('should not show error text when value is bigger than 0',
-        (WidgetTester tester) async {
+    testWidgets('should not show error text when value is bigger than 0', (
+      WidgetTester tester,
+    ) async {
       const widgetName = 'sc1';
-      final switchKey = GlobalKey<
-          FormBuilderFieldState<FormBuilderCupertinoSlider, double>>();
+      final switchKey =
+          GlobalKey<
+            FormBuilderFieldState<FormBuilderCupertinoSlider, double>
+          >();
       const errorTextField = 'error text field';
       final testWidget = FormBuilderCupertinoSlider(
         name: widgetName,
@@ -96,8 +110,8 @@ void main() {
         max: 10,
         min: 0,
         initialValue: 0,
-        validator: (value) =>
-            value == null || value <= 0 ? errorTextField : null,
+        validator:
+            (value) => value == null || value <= 0 ? errorTextField : null,
       );
       await tester.pumpWidget(buildTestableFieldWidget(testWidget));
 
@@ -114,8 +128,10 @@ void main() {
   group('reset -', () {
     testWidgets('Should reset to null when call reset', (tester) async {
       const widgetName = 'sc1';
-      final switchKey = GlobalKey<
-          FormBuilderFieldState<FormBuilderCupertinoSlider, double>>();
+      final switchKey =
+          GlobalKey<
+            FormBuilderFieldState<FormBuilderCupertinoSlider, double>
+          >();
       final testWidget = FormBuilderCupertinoSlider(
         name: widgetName,
         key: switchKey,
@@ -133,8 +149,10 @@ void main() {
     });
     testWidgets('Should reset to initial when call reset', (tester) async {
       const widgetName = 'sc1';
-      final switchKey = GlobalKey<
-          FormBuilderFieldState<FormBuilderCupertinoSlider, double>>();
+      final switchKey =
+          GlobalKey<
+            FormBuilderFieldState<FormBuilderCupertinoSlider, double>
+          >();
       const double initialValue = 0;
       final testWidget = FormBuilderCupertinoSlider(
         name: widgetName,
@@ -152,28 +170,31 @@ void main() {
       expect(switchKey.currentState?.value, equals(initialValue));
     });
     testWidgets(
-        'Should reset custom error when invalidate field and then reset',
-        (tester) async {
-      const widgetName = 'sc1';
-      final switchKey = GlobalKey<
-          FormBuilderFieldState<FormBuilderCupertinoSlider, double>>();
-      const errorTextField = 'error text field';
-      final testWidget = FormBuilderCupertinoSlider(
-        name: widgetName,
-        key: switchKey,
-        max: 10,
-        min: 0,
-        initialValue: 0,
-      );
-      await tester.pumpWidget(buildTestableFieldWidget(testWidget));
+      'Should reset custom error when invalidate field and then reset',
+      (tester) async {
+        const widgetName = 'sc1';
+        final switchKey =
+            GlobalKey<
+              FormBuilderFieldState<FormBuilderCupertinoSlider, double>
+            >();
+        const errorTextField = 'error text field';
+        final testWidget = FormBuilderCupertinoSlider(
+          name: widgetName,
+          key: switchKey,
+          max: 10,
+          min: 0,
+          initialValue: 0,
+        );
+        await tester.pumpWidget(buildTestableFieldWidget(testWidget));
 
-      switchKey.currentState?.invalidate(errorTextField);
-      await tester.pumpAndSettle();
+        switchKey.currentState?.invalidate(errorTextField);
+        await tester.pumpAndSettle();
 
-      // Reset custom error
-      switchKey.currentState?.reset();
-      await tester.pumpAndSettle();
-      expect(find.text(errorTextField), findsNothing);
-    });
+        // Reset custom error
+        switchKey.currentState?.reset();
+        await tester.pumpAndSettle();
+        expect(find.text(errorTextField), findsNothing);
+      },
+    );
   });
 }

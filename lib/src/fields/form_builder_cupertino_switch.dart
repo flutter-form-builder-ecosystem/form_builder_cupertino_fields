@@ -336,52 +336,55 @@ class FormBuilderCupertinoSwitch extends FormBuilderField<bool> {
     this.trackOutlineWidth,
     this.thumbIcon,
   }) : super(
-          builder: (FormFieldState<bool?> field) {
-            final state = field as _FormBuilderCupertinoSwitchState;
+         builder: (FormFieldState<bool?> field) {
+           final state = field as _FormBuilderCupertinoSwitchState;
 
-            final fieldWidget = CupertinoSwitch(
-              value: state.value ?? false,
-              onChanged: state.enabled
-                  ? (value) {
-                      field.didChange(value);
-                    }
-                  : null,
-              dragStartBehavior: dragStartBehavior,
-              thumbColor: thumbColor,
-              activeTrackColor: activeTrackColor,
-              activeThumbImage: activeThumbImage,
-              inactiveThumbImage: inactiveThumbImage,
-              applyTheme: applyTheme,
-              autofocus: autofocus,
-              focusColor: focusColor,
-              focusNode: focusNode,
-              inactiveThumbColor: inactiveThumbColor,
-              inactiveTrackColor: inactiveTrackColor,
-              mouseCursor: mouseCursor,
-              onActiveThumbImageError: onActiveThumbImageError,
-              onInactiveThumbImageError: onInactiveThumbImageError,
-              offLabelColor: offLabelColor,
-              onLabelColor: onLabelColor,
-              onFocusChange: onFocusChange,
-              thumbIcon: thumbIcon,
-              trackOutlineColor: trackOutlineColor,
-              trackOutlineWidth: trackOutlineWidth,
-            );
-            return CupertinoFormRow(
-              error: state.hasError
-                  ? errorBuilder != null
-                      ? errorBuilder(state.errorText ?? '')
-                      : Text(state.errorText ?? '')
-                  : null,
-              helper: helper,
-              padding: contentPadding,
-              prefix: prefix,
-              child: shouldExpandedField
-                  ? SizedBox(width: double.infinity, child: fieldWidget)
-                  : fieldWidget,
-            );
-          },
-        );
+           final fieldWidget = CupertinoSwitch(
+             value: state.value ?? false,
+             onChanged:
+                 state.enabled
+                     ? (value) {
+                       field.didChange(value);
+                     }
+                     : null,
+             dragStartBehavior: dragStartBehavior,
+             thumbColor: thumbColor,
+             activeTrackColor: activeTrackColor,
+             activeThumbImage: activeThumbImage,
+             inactiveThumbImage: inactiveThumbImage,
+             applyTheme: applyTheme,
+             autofocus: autofocus,
+             focusColor: focusColor,
+             focusNode: focusNode,
+             inactiveThumbColor: inactiveThumbColor,
+             inactiveTrackColor: inactiveTrackColor,
+             mouseCursor: mouseCursor,
+             onActiveThumbImageError: onActiveThumbImageError,
+             onInactiveThumbImageError: onInactiveThumbImageError,
+             offLabelColor: offLabelColor,
+             onLabelColor: onLabelColor,
+             onFocusChange: onFocusChange,
+             thumbIcon: thumbIcon,
+             trackOutlineColor: trackOutlineColor,
+             trackOutlineWidth: trackOutlineWidth,
+           );
+           return CupertinoFormRow(
+             error:
+                 state.hasError
+                     ? errorBuilder != null
+                         ? errorBuilder(state.errorText ?? '')
+                         : Text(state.errorText ?? '')
+                     : null,
+             helper: helper,
+             padding: contentPadding,
+             prefix: prefix,
+             child:
+                 shouldExpandedField
+                     ? SizedBox(width: double.infinity, child: fieldWidget)
+                     : fieldWidget,
+           );
+         },
+       );
 
   @override
   FormBuilderFieldState<FormBuilderCupertinoSwitch, bool> createState() =>

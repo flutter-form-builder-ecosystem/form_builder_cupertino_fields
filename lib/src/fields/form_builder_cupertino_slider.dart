@@ -187,67 +187,69 @@ class FormBuilderCupertinoSlider extends FormBuilderField<double> {
     this.contentPadding,
     this.prefix,
   }) : super(
-          builder: (FormFieldState<double?> field) {
-            final state = field as _FormBuilderCupertinoSliderState;
-            final effectiveNumberFormat =
-                numberFormat ?? NumberFormat.compact();
+         builder: (FormFieldState<double?> field) {
+           final state = field as _FormBuilderCupertinoSliderState;
+           final effectiveNumberFormat = numberFormat ?? NumberFormat.compact();
 
-            final fieldWidget = Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  child: CupertinoSlider(
-                    value: field.value!,
-                    min: min,
-                    max: max,
-                    divisions: divisions,
-                    activeColor: activeColor,
-                    onChangeEnd: onChangeEnd,
-                    onChangeStart: onChangeStart,
-                    onChanged: state.enabled
-                        ? (value) {
-                            field.didChange(value);
-                          }
-                        : null,
-                    thumbColor: thumbColor,
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    if (displayValues != DisplayValues.none &&
-                        displayValues != DisplayValues.current)
-                      minValueWidget?.call(effectiveNumberFormat.format(min)) ??
-                          Text(effectiveNumberFormat.format(min)),
-                    if (displayValues != DisplayValues.none &&
-                        displayValues != DisplayValues.minMax)
-                      valueWidget?.call(
-                              effectiveNumberFormat.format(field.value)) ??
-                          Text(effectiveNumberFormat.format(field.value)),
-                    if (displayValues != DisplayValues.none &&
-                        displayValues != DisplayValues.current)
-                      maxValueWidget?.call(effectiveNumberFormat.format(max)) ??
-                          Text(effectiveNumberFormat.format(max)),
-                  ],
-                ),
-              ],
-            );
+           final fieldWidget = Column(
+             mainAxisSize: MainAxisSize.min,
+             crossAxisAlignment: CrossAxisAlignment.end,
+             children: [
+               SizedBox(
+                 width: double.infinity,
+                 child: CupertinoSlider(
+                   value: field.value!,
+                   min: min,
+                   max: max,
+                   divisions: divisions,
+                   activeColor: activeColor,
+                   onChangeEnd: onChangeEnd,
+                   onChangeStart: onChangeStart,
+                   onChanged:
+                       state.enabled
+                           ? (value) {
+                             field.didChange(value);
+                           }
+                           : null,
+                   thumbColor: thumbColor,
+                 ),
+               ),
+               Row(
+                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                 children: <Widget>[
+                   if (displayValues != DisplayValues.none &&
+                       displayValues != DisplayValues.current)
+                     minValueWidget?.call(effectiveNumberFormat.format(min)) ??
+                         Text(effectiveNumberFormat.format(min)),
+                   if (displayValues != DisplayValues.none &&
+                       displayValues != DisplayValues.minMax)
+                     valueWidget?.call(
+                           effectiveNumberFormat.format(field.value),
+                         ) ??
+                         Text(effectiveNumberFormat.format(field.value)),
+                   if (displayValues != DisplayValues.none &&
+                       displayValues != DisplayValues.current)
+                     maxValueWidget?.call(effectiveNumberFormat.format(max)) ??
+                         Text(effectiveNumberFormat.format(max)),
+                 ],
+               ),
+             ],
+           );
 
-            return CupertinoFormRow(
-              error: state.hasError
-                  ? errorBuilder != null
-                      ? errorBuilder(state.errorText ?? '')
-                      : Text(state.errorText ?? '')
-                  : null,
-              helper: helper,
-              padding: contentPadding,
-              prefix: prefix,
-              child: fieldWidget,
-            );
-          },
-        );
+           return CupertinoFormRow(
+             error:
+                 state.hasError
+                     ? errorBuilder != null
+                         ? errorBuilder(state.errorText ?? '')
+                         : Text(state.errorText ?? '')
+                     : null,
+             helper: helper,
+             padding: contentPadding,
+             prefix: prefix,
+             child: fieldWidget,
+           );
+         },
+       );
 
   @override
   FormBuilderFieldState<FormBuilderCupertinoSlider, double> createState() =>
