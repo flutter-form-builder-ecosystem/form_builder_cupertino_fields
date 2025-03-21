@@ -6,8 +6,9 @@ import '../form_builder_tester.dart';
 
 void main() {
   group('initialValue -', () {
-    testWidgets('should initial value when set initialValue',
-        (WidgetTester tester) async {
+    testWidgets('should initial value when set initialValue', (
+      WidgetTester tester,
+    ) async {
       const widgetName = 'sc1';
       final switchKey = GlobalKey<FormBuilderFieldState>();
       final testWidget = FormBuilderCupertinoSwitch(
@@ -22,8 +23,9 @@ void main() {
   });
 
   group('errors -', () {
-    testWidgets('should error text when value is false',
-        (WidgetTester tester) async {
+    testWidgets('should error text when value is false', (
+      WidgetTester tester,
+    ) async {
       const widgetName = 'sc1';
       const errorTextField = 'error text field';
       final switchKey = GlobalKey<FormBuilderFieldState>();
@@ -47,8 +49,9 @@ void main() {
 
       expect(find.text(errorTextField), findsNothing);
     });
-    testWidgets('should custom error text when invalidate field',
-        (WidgetTester tester) async {
+    testWidgets('should custom error text when invalidate field', (
+      WidgetTester tester,
+    ) async {
       const widgetName = 'sc1';
       const errorTextField = 'error text field';
       final switchKey = GlobalKey<FormBuilderFieldState>();
@@ -63,8 +66,9 @@ void main() {
 
       expect(find.text(errorTextField), findsOneWidget);
     });
-    testWidgets('should not show error text when value is true',
-        (WidgetTester tester) async {
+    testWidgets('should not show error text when value is true', (
+      WidgetTester tester,
+    ) async {
       const widgetName = 'sc1';
       final switchKey = GlobalKey<FormBuilderFieldState>();
       const errorTextField = 'error text field';
@@ -119,24 +123,25 @@ void main() {
       expect(switchKey.currentState?.value, equals(initialValue));
     });
     testWidgets(
-        'Should reset custom error when invalidate field and then reset',
-        (tester) async {
-      const widgetName = 'sc1';
-      final switchKey = GlobalKey<FormBuilderFieldState>();
-      const errorTextField = 'error text field';
-      final testWidget = FormBuilderCupertinoSwitch(
-        name: widgetName,
-        key: switchKey,
-      );
-      await tester.pumpWidget(buildTestableFieldWidget(testWidget));
+      'Should reset custom error when invalidate field and then reset',
+      (tester) async {
+        const widgetName = 'sc1';
+        final switchKey = GlobalKey<FormBuilderFieldState>();
+        const errorTextField = 'error text field';
+        final testWidget = FormBuilderCupertinoSwitch(
+          name: widgetName,
+          key: switchKey,
+        );
+        await tester.pumpWidget(buildTestableFieldWidget(testWidget));
 
-      switchKey.currentState?.invalidate(errorTextField);
-      await tester.pumpAndSettle();
+        switchKey.currentState?.invalidate(errorTextField);
+        await tester.pumpAndSettle();
 
-      // Reset custom error
-      switchKey.currentState?.reset();
-      await tester.pumpAndSettle();
-      expect(find.text(errorTextField), findsNothing);
-    });
+        // Reset custom error
+        switchKey.currentState?.reset();
+        await tester.pumpAndSettle();
+        expect(find.text(errorTextField), findsNothing);
+      },
+    );
   });
 }

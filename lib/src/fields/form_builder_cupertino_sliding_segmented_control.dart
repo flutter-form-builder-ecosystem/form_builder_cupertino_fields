@@ -86,47 +86,53 @@ class FormBuilderCupertinoSlidingSegmentedControl<T extends Object>
     this.contentPadding,
     this.prefix,
   }) : super(
-          builder: (FormFieldState<T?> field) {
-            final state =
-                field as _FormBuilderCupertinoSlidingSegmentedControlState<T>;
-            final theme = CupertinoTheme.of(state.context);
+         builder: (FormFieldState<T?> field) {
+           final state =
+               field as _FormBuilderCupertinoSlidingSegmentedControlState<T>;
+           final theme = CupertinoTheme.of(state.context);
 
-            final fieldWidget = CupertinoSlidingSegmentedControl<T>(
-              backgroundColor:
-                  backgroundColor ?? CupertinoColors.tertiarySystemFill,
-              thumbColor: thumbColor ?? theme.primaryColor,
-              groupValue: state.value,
-              children: <T, Widget>{
-                for (final option in options) option.value: option,
-              },
-              padding: padding ??
-                  const EdgeInsets.symmetric(vertical: 2, horizontal: 3),
-              onValueChanged: (value) {
-                state.enabled ? field.didChange(value) : field.reset();
-              },
-            );
+           final fieldWidget = CupertinoSlidingSegmentedControl<T>(
+             backgroundColor:
+                 backgroundColor ?? CupertinoColors.tertiarySystemFill,
+             thumbColor: thumbColor ?? theme.primaryColor,
+             groupValue: state.value,
+             children: <T, Widget>{
+               for (final option in options) option.value: option,
+             },
+             padding:
+                 padding ??
+                 const EdgeInsets.symmetric(vertical: 2, horizontal: 3),
+             onValueChanged: (value) {
+               state.enabled ? field.didChange(value) : field.reset();
+             },
+           );
 
-            return CupertinoFormRow(
-              error: state.hasError
-                  ? errorBuilder != null
-                      ? errorBuilder(state.errorText ?? '')
-                      : Text(state.errorText ?? '')
-                  : null,
-              helper: helper,
-              padding: contentPadding,
-              prefix: prefix,
-              child: shouldExpandedField
-                  ? SizedBox(width: double.infinity, child: fieldWidget)
-                  : fieldWidget,
-            );
-          },
-        );
+           return CupertinoFormRow(
+             error:
+                 state.hasError
+                     ? errorBuilder != null
+                         ? errorBuilder(state.errorText ?? '')
+                         : Text(state.errorText ?? '')
+                     : null,
+             helper: helper,
+             padding: contentPadding,
+             prefix: prefix,
+             child:
+                 shouldExpandedField
+                     ? SizedBox(width: double.infinity, child: fieldWidget)
+                     : fieldWidget,
+           );
+         },
+       );
 
   @override
   FormBuilderFieldState<FormBuilderCupertinoSlidingSegmentedControl<T>, T>
-      createState() => _FormBuilderCupertinoSlidingSegmentedControlState();
+  createState() => _FormBuilderCupertinoSlidingSegmentedControlState();
 }
 
 class _FormBuilderCupertinoSlidingSegmentedControlState<T extends Object>
-    extends FormBuilderFieldState<
-        FormBuilderCupertinoSlidingSegmentedControl<T>, T> {}
+    extends
+        FormBuilderFieldState<
+          FormBuilderCupertinoSlidingSegmentedControl<T>,
+          T
+        > {}
