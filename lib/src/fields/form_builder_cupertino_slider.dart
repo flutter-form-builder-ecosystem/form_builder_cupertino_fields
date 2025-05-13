@@ -147,15 +147,6 @@ class FormBuilderCupertinoSlider extends FormBuilderField<double> {
   /// null, the row is shorter.
   final Widget? helper;
 
-  /// A builder widget that is displayed underneath the [prefix] and [child] widgets.
-  ///
-  /// The [error] widget is primarily used to inform users of input errors. When
-  /// a [Text] is given to [error], it will be shown in
-  /// [CupertinoColors.destructiveRed] coloring and medium-weighted font. The
-  /// row becomes taller in order to display the [helper] widget underneath
-  /// [prefix] and [child]. If null, the row is shorter.
-  final Widget? Function(String error)? errorBuilder;
-
   /// Creates field for selection of a numerical value on a slider
   FormBuilderCupertinoSlider({
     super.key,
@@ -170,6 +161,7 @@ class FormBuilderCupertinoSlider extends FormBuilderField<double> {
     super.onReset,
     super.focusNode,
     super.restorationId,
+    super.errorBuilder,
     required this.min,
     required this.max,
     this.divisions,
@@ -182,7 +174,6 @@ class FormBuilderCupertinoSlider extends FormBuilderField<double> {
     this.maxValueWidget,
     this.minValueWidget,
     this.valueWidget,
-    this.errorBuilder,
     this.helper,
     this.contentPadding,
     this.prefix,
@@ -240,7 +231,7 @@ class FormBuilderCupertinoSlider extends FormBuilderField<double> {
              error:
                  state.hasError
                      ? errorBuilder != null
-                         ? errorBuilder(state.errorText ?? '')
+                         ? errorBuilder(state.context, state.errorText ?? '')
                          : Text(state.errorText ?? '')
                      : null,
              helper: helper,
