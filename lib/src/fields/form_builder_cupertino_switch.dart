@@ -287,15 +287,6 @@ class FormBuilderCupertinoSwitch extends FormBuilderField<bool> {
   /// null, the row is shorter.
   final Widget? helper;
 
-  /// A builder widget that is displayed underneath the [prefix] and [child] widgets.
-  ///
-  /// The [error] widget is primarily used to inform users of input errors. When
-  /// a [Text] is given to [error], it will be shown in
-  /// [CupertinoColors.destructiveRed] coloring and medium-weighted font. The
-  /// row becomes taller in order to display the [helper] widget underneath
-  /// [prefix] and [child]. If null, the row is shorter.
-  final Widget? Function(String error)? errorBuilder;
-
   /// Creates On/Off Cupertino switch field
   FormBuilderCupertinoSwitch({
     super.key,
@@ -310,12 +301,12 @@ class FormBuilderCupertinoSwitch extends FormBuilderField<bool> {
     super.onReset,
     super.focusNode,
     super.restorationId,
+    super.errorBuilder,
     this.activeTrackColor,
     this.dragStartBehavior = DragStartBehavior.start,
     this.trackColor,
     this.thumbColor,
     this.shouldExpandedField = false,
-    this.errorBuilder,
     this.helper,
     this.contentPadding,
     this.prefix,
@@ -372,7 +363,7 @@ class FormBuilderCupertinoSwitch extends FormBuilderField<bool> {
              error:
                  state.hasError
                      ? errorBuilder != null
-                         ? errorBuilder(state.errorText ?? '')
+                         ? errorBuilder(state.context, state.errorText ?? '')
                          : Text(state.errorText ?? '')
                      : null,
              helper: helper,
