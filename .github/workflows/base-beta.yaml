@@ -23,7 +23,6 @@ jobs:
     uses: flutter-form-builder-ecosystem/.github/.github/workflows/minimal-quality.yaml@main
     with:
       codecov-name: form_builder_cupertino_fields
-      enable-fix-tests: true
       fvm-flavor: beta
   example:
     uses: flutter-form-builder-ecosystem/.github/.github/workflows/build-examples.yaml@main
