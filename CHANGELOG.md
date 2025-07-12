@@ -1,3 +1,9 @@
+# 0.6.0
+
+* `FormBuilderCupertinoTextField`: add missing properties
+* Set minimal Flutter version to 3.32.0
+* Set minimal Dart version to 3.8.0
+
 # 0.5.0
 
 * `FormBuilderCupertinoTextField`: add `onTapOutside` parameter
