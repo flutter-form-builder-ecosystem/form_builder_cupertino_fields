@@ -487,19 +487,17 @@ class FormBuilderCupertinoTextField extends FormBuilderField<String> {
            );
 
            return CupertinoFormRow(
-             error:
-                 state.hasError
-                     ? errorBuilder != null
-                         ? errorBuilder(state.context, state.errorText ?? '')
-                         : Text(state.errorText ?? '')
-                     : null,
+             error: state.hasError
+                 ? errorBuilder != null
+                       ? errorBuilder(state.context, state.errorText ?? '')
+                       : Text(state.errorText ?? '')
+                 : null,
              helper: helper,
              padding: contentPadding,
              prefix: prefix,
-             child:
-                 shouldExpandedField
-                     ? SizedBox(width: double.infinity, child: fieldWidget)
-                     : fieldWidget,
+             child: shouldExpandedField
+                 ? SizedBox(width: double.infinity, child: fieldWidget)
+                 : fieldWidget,
            );
          },
        );

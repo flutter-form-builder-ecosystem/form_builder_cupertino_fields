@@ -158,28 +158,25 @@ class FormBuilderCupertinoCheckbox extends FormBuilderField<bool> {
              autofocus: autofocus,
              mouseCursor: mouseCursor,
              semanticLabel: semanticLabel,
-             onChanged:
-                 state.enabled
-                     ? (value) {
-                       field.didChange(value);
-                     }
-                     : null,
+             onChanged: state.enabled
+                 ? (value) {
+                     field.didChange(value);
+                   }
+                 : null,
              activeColor: activeColor,
            );
            return CupertinoFormRow(
-             error:
-                 state.hasError
-                     ? errorBuilder != null
-                         ? errorBuilder(state.context, state.errorText ?? '')
-                         : Text(state.errorText ?? '')
-                     : null,
+             error: state.hasError
+                 ? errorBuilder != null
+                       ? errorBuilder(state.context, state.errorText ?? '')
+                       : Text(state.errorText ?? '')
+                 : null,
              helper: helper,
              padding: contentPadding,
              prefix: prefix,
-             child:
-                 shouldExpandedField
-                     ? SizedBox(width: double.infinity, child: fieldWidget)
-                     : fieldWidget,
+             child: shouldExpandedField
+                 ? SizedBox(width: double.infinity, child: fieldWidget)
+                 : fieldWidget,
            );
          },
        );

@@ -32,8 +32,8 @@ void main() {
       final testWidget = FormBuilderCupertinoTextField(
         name: widgetName,
         key: textFieldKey,
-        validator:
-            (value) => value == null || value.isEmpty ? errorTextField : null,
+        validator: (value) =>
+            value == null || value.isEmpty ? errorTextField : null,
       );
       await tester.pumpWidget(buildTestableFieldWidget(testWidget));
 
@@ -76,8 +76,8 @@ void main() {
       final testWidget = FormBuilderCupertinoTextField(
         name: widgetName,
         key: textFieldKey,
-        validator:
-            (value) => value == null || value.isEmpty ? errorTextField : null,
+        validator: (value) =>
+            value == null || value.isEmpty ? errorTextField : null,
       );
       await tester.pumpWidget(buildTestableFieldWidget(testWidget));
 

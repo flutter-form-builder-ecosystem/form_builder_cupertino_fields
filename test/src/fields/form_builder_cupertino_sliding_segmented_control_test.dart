@@ -40,8 +40,8 @@ void main() {
           FormBuilderFieldOption(value: 'AM'),
           FormBuilderFieldOption(value: 'PM'),
         ],
-        validator:
-            (value) => value == null || value.isEmpty ? errorTextField : null,
+        validator: (value) =>
+            value == null || value.isEmpty ? errorTextField : null,
       );
       await tester.pumpWidget(buildTestableFieldWidget(testWidget));
 
@@ -92,8 +92,8 @@ void main() {
           FormBuilderFieldOption(value: 'AM'),
           FormBuilderFieldOption(value: 'PM'),
         ],
-        validator:
-            (value) => value == null || value.isEmpty ? errorTextField : null,
+        validator: (value) =>
+            value == null || value.isEmpty ? errorTextField : null,
       );
       await tester.pumpWidget(buildTestableFieldWidget(testWidget));
 

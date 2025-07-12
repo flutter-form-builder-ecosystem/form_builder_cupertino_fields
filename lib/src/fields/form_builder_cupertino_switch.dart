@@ -332,12 +332,11 @@ class FormBuilderCupertinoSwitch extends FormBuilderField<bool> {
 
            final fieldWidget = CupertinoSwitch(
              value: state.value ?? false,
-             onChanged:
-                 state.enabled
-                     ? (value) {
-                       field.didChange(value);
-                     }
-                     : null,
+             onChanged: state.enabled
+                 ? (value) {
+                     field.didChange(value);
+                   }
+                 : null,
              dragStartBehavior: dragStartBehavior,
              thumbColor: thumbColor,
              activeTrackColor: activeTrackColor,
@@ -360,19 +359,17 @@ class FormBuilderCupertinoSwitch extends FormBuilderField<bool> {
              trackOutlineWidth: trackOutlineWidth,
            );
            return CupertinoFormRow(
-             error:
-                 state.hasError
-                     ? errorBuilder != null
-                         ? errorBuilder(state.context, state.errorText ?? '')
-                         : Text(state.errorText ?? '')
-                     : null,
+             error: state.hasError
+                 ? errorBuilder != null
+                       ? errorBuilder(state.context, state.errorText ?? '')
+                       : Text(state.errorText ?? '')
+                 : null,
              helper: helper,
              padding: contentPadding,
              prefix: prefix,
-             child:
-                 shouldExpandedField
-                     ? SizedBox(width: double.infinity, child: fieldWidget)
-                     : fieldWidget,
+             child: shouldExpandedField
+                 ? SizedBox(width: double.infinity, child: fieldWidget)
+                 : fieldWidget,
            );
          },
        );

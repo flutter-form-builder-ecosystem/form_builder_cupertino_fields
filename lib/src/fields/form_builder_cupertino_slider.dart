@@ -196,12 +196,11 @@ class FormBuilderCupertinoSlider extends FormBuilderField<double> {
                    activeColor: activeColor,
                    onChangeEnd: onChangeEnd,
                    onChangeStart: onChangeStart,
-                   onChanged:
-                       state.enabled
-                           ? (value) {
-                             field.didChange(value);
-                           }
-                           : null,
+                   onChanged: state.enabled
+                       ? (value) {
+                           field.didChange(value);
+                         }
+                       : null,
                    thumbColor: thumbColor,
                  ),
                ),
@@ -228,12 +227,11 @@ class FormBuilderCupertinoSlider extends FormBuilderField<double> {
            );
 
            return CupertinoFormRow(
-             error:
-                 state.hasError
-                     ? errorBuilder != null
-                         ? errorBuilder(state.context, state.errorText ?? '')
-                         : Text(state.errorText ?? '')
-                     : null,
+             error: state.hasError
+                 ? errorBuilder != null
+                       ? errorBuilder(state.context, state.errorText ?? '')
+                       : Text(state.errorText ?? '')
+                 : null,
              helper: helper,
              padding: contentPadding,
              prefix: prefix,
