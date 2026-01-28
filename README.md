@@ -6,20 +6,22 @@ Additional form inputs fields with Cupertino style for [flutter_form_builder](ht
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/flutter-form-builder-ecosystem/form_builder_cupertino_fields/base.yaml?branch=main&logo=github&style=for-the-badge)](https://github.com/flutter-form-builder-ecosystem/form_builder_cupertino_fields/actions/workflows/base.yaml)
 [![Codecov](https://img.shields.io/codecov/c/github/flutter-form-builder-ecosystem/form_builder_cupertino_fields?logo=codecov&style=for-the-badge)](https://codecov.io/gh/flutter-form-builder-ecosystem/form_builder_cupertino_fields/)
 [![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/flutter-form-builder-ecosystem/form_builder_cupertino_fields?logo=codefactor&style=for-the-badge)](https://www.codefactor.io/repository/github/flutter-form-builder-ecosystem/form_builder_cupertino_fields)
-___
 
-- [Features](#features)
-- [Inputs](#inputs)
-- [Use](#use)
-  - [Setup](#setup)
-  - [Basic use](#basic-use)
-- [Support](#support)
-  - [Contribute](#contribute)
-  - [Questions and answers](#questions-and-answers)
-  - [Donations](#donations)
-- [Roadmap](#roadmap)
-- [Ecosystem](#ecosystem)
-- [Thanks to](#thanks-to)
+---
+
+- [Form Builder Cupertino Fields](#form-builder-cupertino-fields)
+  - [Features](#features)
+  - [Inputs](#inputs)
+  - [Use](#use)
+    - [Setup](#setup)
+    - [Basic use](#basic-use)
+  - [Support](#support)
+    - [Contribute](#contribute)
+    - [Questions and answers](#questions-and-answers)
+    - [Donations](#donations)
+  - [Roadmap](#roadmap)
+  - [Ecosystem](#ecosystem)
+  - [Thanks to](#thanks-to)
 
 ## Features
 
@@ -31,6 +33,7 @@ ___
 The currently supported fields include:
 
 - `FormBuilderCupertinoCheckbox` - Single checkbox field
+- `FormBuilderCupertinoDateTimePicker` - Date picker field
 - `FormBuilderCupertinoSegmentedControl` - Segmented control using `CupertinoSegmentedControl`
 - `FormBuilderCupertinoSlidingSegmentedControl` - Segmented control bar using `CupertinoSlidingSegmentedControl`
 - `FormBuilderCupertinoSlider` - For selection of a numerical value on a slider
@@ -71,7 +74,7 @@ You have some ways to contribute to this packages
 - Intermediate: Implement new features (from issues or not) and created pull requests
 - Advanced: Join to [organization](#ecosystem) like a member and help coding, manage issues, dicuss new features and other things
 
- See [contribution file](https://github.com/flutter-form-builder-ecosystem/.github/blob/main/CONTRIBUTING.md) for more details
+See [contribution file](https://github.com/flutter-form-builder-ecosystem/.github/blob/main/CONTRIBUTING.md) for more details
 
 ### Questions and answers
 

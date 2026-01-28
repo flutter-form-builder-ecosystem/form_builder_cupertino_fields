@@ -4,7 +4,7 @@ version: 0.6.0
 repository: https://github.com/flutter-form-builder-ecosystem/form_builder_cupertino_fields
 issue_tracker: https://github.com/flutter-form-builder-ecosystem/form_builder_cupertino_fields/issues
 homepage: https://github.com/flutter-form-builder-ecosystem
-topics: 
+topics:
   - form
   - cupertino
 funding:

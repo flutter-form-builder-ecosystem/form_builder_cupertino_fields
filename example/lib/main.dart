@@ -99,6 +99,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   validator: (value) =>
                       value != null && value.length > 4 ? null : 'Write a text',
                 ),
+                const SizedBox(height: 16),
+                FormBuilderCupertinoDateTimePicker(
+                  name: 'date',
+                  prefix: const Icon(CupertinoIcons.calendar),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) => value != null ? null : 'Required date',
+                  initialValue: DateTime.now(),
+                ),
               ],
             ),
           ),
