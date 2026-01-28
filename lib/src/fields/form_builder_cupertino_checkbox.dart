@@ -36,15 +36,6 @@ class FormBuilderCupertinoCheckbox extends FormBuilderField<bool> {
   /// null, the row is shorter.
   final Widget? helper;
 
-  /// A builder widget that is displayed underneath the [prefix] and [child] widgets.
-  ///
-  /// The [error] widget is primarily used to inform users of input errors. When
-  /// a [Text] is given to [error], it will be shown in
-  /// [CupertinoColors.destructiveRed] coloring and medium-weighted font. The
-  /// row becomes taller in order to display the [helper] widget underneath
-  /// [prefix] and [child]. If null, the row is shorter.
-  final Widget? Function(String error)? errorBuilder;
-
   /// {@macro flutter.cupertino.CupertinoCheckbox.fillColor}
   ///
   /// If [fillColor] resolves to null for the requested state, then the fill color
@@ -136,9 +127,9 @@ class FormBuilderCupertinoCheckbox extends FormBuilderField<bool> {
     super.onReset,
     super.focusNode,
     super.restorationId,
+    super.errorBuilder,
     this.activeColor,
     this.shouldExpandedField = false,
-    this.errorBuilder,
     this.helper,
     this.contentPadding,
     this.prefix,
@@ -167,28 +158,25 @@ class FormBuilderCupertinoCheckbox extends FormBuilderField<bool> {
              autofocus: autofocus,
              mouseCursor: mouseCursor,
              semanticLabel: semanticLabel,
-             onChanged:
-                 state.enabled
-                     ? (value) {
-                       field.didChange(value);
-                     }
-                     : null,
+             onChanged: state.enabled
+                 ? (value) {
+                     field.didChange(value);
+                   }
+                 : null,
              activeColor: activeColor,
            );
            return CupertinoFormRow(
-             error:
-                 state.hasError
-                     ? errorBuilder != null
-                         ? errorBuilder(state.errorText ?? '')
-                         : Text(state.errorText ?? '')
-                     : null,
+             error: state.hasError
+                 ? errorBuilder != null
+                       ? errorBuilder(state.context, state.errorText ?? '')
+                       : Text(state.errorText ?? '')
+                 : null,
              helper: helper,
              padding: contentPadding,
              prefix: prefix,
-             child:
-                 shouldExpandedField
-                     ? SizedBox(width: double.infinity, child: fieldWidget)
-                     : fieldWidget,
+             child: shouldExpandedField
+                 ? SizedBox(width: double.infinity, child: fieldWidget)
+                 : fieldWidget,
            );
          },
        );

@@ -84,11 +84,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   min: 1,
                   max: 100,
-                  validator:
-                      (value) =>
-                          value != null && value < 50 && value > 5
-                              ? null
-                              : 'Required value between 5 and 50',
+                  validator: (value) => value != null && value < 50 && value > 5
+                      ? null
+                      : 'Required value between 5 and 50',
                 ),
                 const SizedBox(height: 16),
                 FormBuilderCupertinoTextField(
@@ -98,11 +96,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator:
-                      (value) =>
-                          value != null && value.length > 4
-                              ? null
-                              : 'Write a text',
+                  validator: (value) =>
+                      value != null && value.length > 4 ? null : 'Write a text',
                 ),
                 const SizedBox(height: 16),
                 FormBuilderCupertinoDateTimePicker(

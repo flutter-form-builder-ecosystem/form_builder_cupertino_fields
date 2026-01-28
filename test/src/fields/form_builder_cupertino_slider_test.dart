@@ -54,8 +54,8 @@ void main() {
         max: 10,
         min: 0,
         initialValue: 0,
-        validator:
-            (value) => value == null || value <= 0 ? errorTextField : null,
+        validator: (value) =>
+            value == null || value <= 0 ? errorTextField : null,
       );
       await tester.pumpWidget(buildTestableFieldWidget(testWidget));
 
@@ -110,8 +110,8 @@ void main() {
         max: 10,
         min: 0,
         initialValue: 0,
-        validator:
-            (value) => value == null || value <= 0 ? errorTextField : null,
+        validator: (value) =>
+            value == null || value <= 0 ? errorTextField : null,
       );
       await tester.pumpWidget(buildTestableFieldWidget(testWidget));
 
