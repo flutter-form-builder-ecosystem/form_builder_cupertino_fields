@@ -10,8 +10,9 @@ import '../form_builder_tester.dart';
 void main() {
   group('FormBuilderCupertinoDateTimePicker Tests -', () {
     // Test for initial value
-    testWidgets('should initialize with the given initial value',
-        (WidgetTester tester) async {
+    testWidgets('should initialize with the given initial value', (
+      WidgetTester tester,
+    ) async {
       const widgetName = 'dateTimePicker';
       final pickerKey = GlobalKey<FormBuilderFieldState>();
 
@@ -27,8 +28,9 @@ void main() {
     });
 
     // Test for reset functionality
-    testWidgets('should reset to initial value when reset is called',
-        (WidgetTester tester) async {
+    testWidgets('should reset to initial value when reset is called', (
+      WidgetTester tester,
+    ) async {
       const widgetName = 'dateTimePicker';
       final pickerKey = GlobalKey<FormBuilderFieldState>();
       final initialValue = DateTime(2025, 2, 19, 11, 56);
@@ -53,8 +55,9 @@ void main() {
     });
 
     // Test for date and time selection
-    testWidgets('should update value when a new date and time is selected',
-        (WidgetTester tester) async {
+    testWidgets('should update value when a new date and time is selected', (
+      WidgetTester tester,
+    ) async {
       const widgetName = 'dateTimePicker';
       final pickerKey = GlobalKey<FormBuilderFieldState>();
 
@@ -79,8 +82,9 @@ void main() {
     });
 
     // Test for locale and format
-    testWidgets('should display date in the correct format and locale',
-        (WidgetTester tester) async {
+    testWidgets('should display date in the correct format and locale', (
+      WidgetTester tester,
+    ) async {
       initializeDateFormatting();
       const widgetName = 'dateTimePicker';
       final pickerKey = GlobalKey<FormBuilderFieldState>();
