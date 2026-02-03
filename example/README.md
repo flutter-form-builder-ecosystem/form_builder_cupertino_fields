@@ -1,16 +1,24 @@
-# example
+# Example app
 
-A new Flutter project.
+This Flutter app demonstrates the widgets provided by the
+`form_builder_cupertino_fields` package.
 
-## Getting Started
+## Run locally
 
-This project is a starting point for a Flutter application.
+1. Install Flutter 3.32.0+ and Dart 3.8.0+.
+2. From this folder, get dependencies:
 
-A few resources to get you started if this is your first Flutter project:
+	```bash
+	flutter pub get
+	```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+3. Run on a device or emulator:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+	```bash
+	flutter run
+	```
+
+## Notes
+
+- The app is intended as a minimal showcase.
+- For package usage, see the repository root README.
