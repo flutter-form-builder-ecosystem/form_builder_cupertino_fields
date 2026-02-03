@@ -1,3 +1,11 @@
+# 0.7.0
+
+* Update constraints to Flutter 3.38
+* Update constraints to Dart 3.10
+* Update dependencies
+* Update readme
+* `FormBuilderCupertinoDateTimePicker`: Create this new widget
+
 # 0.6.0
 
 * `FormBuilderCupertinoTextField`: add missing properties
