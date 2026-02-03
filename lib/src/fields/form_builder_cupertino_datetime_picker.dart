@@ -189,15 +189,6 @@ class FormBuilderCupertinoDateTimePicker extends FormBuilderField<DateTime> {
   /// null, the row is shorter.
   final Widget? helper;
 
-  /// A builder widget that is displayed underneath the [prefix] and [child] widgets.
-  ///
-  /// The [error] widget is primarily used to inform users of input errors. When
-  /// a [Text] is given to [error], it will be shown in
-  /// [CupertinoColors.destructiveRed] coloring and medium-weighted font. The
-  /// row becomes taller in order to display the [helper] widget underneath
-  /// [prefix] and [child]. If null, the row is shorter.
-  final Widget? Function(String error)? errorBuilder;
-
   /// Preset the widget's value.
   final bool autofocus;
   final bool obscureText;
@@ -255,6 +246,7 @@ class FormBuilderCupertinoDateTimePicker extends FormBuilderField<DateTime> {
     super.onReset,
     super.focusNode,
     super.restorationId,
+    super.errorBuilder,
     this.inputType = InputType.both,
     this.scrollPadding = const EdgeInsets.all(20.0),
     this.cursorWidth = 2.0,
@@ -267,7 +259,6 @@ class FormBuilderCupertinoDateTimePicker extends FormBuilderField<DateTime> {
     this.prefix,
     this.contentPadding,
     this.helper,
-    this.errorBuilder,
     this.autofocus = false,
     this.obscureText = false,
     this.autocorrect = true,
@@ -349,7 +340,7 @@ class FormBuilderCupertinoDateTimePicker extends FormBuilderField<DateTime> {
            return CupertinoFormRow(
              error: state.hasError
                  ? errorBuilder != null
-                       ? errorBuilder(state.errorText ?? '')
+                       ? errorBuilder(state.context, state.errorText ?? '')
                        : Text(state.errorText ?? '')
                  : null,
              helper: helper,
